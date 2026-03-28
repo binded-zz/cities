@@ -1,0 +1,31 @@
+.tax-production-window {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.tab {
+  background-color: #2a2a2a;
+  border-bottom: 2px solid #3c3c3c;
+}
+
+.tab.active {
+  background-color: #4a4a4a;
+  border-color: #ffffff;
+}
+
+.stats-bar {
+  background-color: #2a2a2a;
+  padding: 10px;
+}
+
+.control {
+  background-color: #3c3c3c;
+  border: none;
+  color: #ffffff;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.control:hover {
+  background-color: #4a4a4a;
+}
