@@ -1,4 +1,4 @@
-name: Build Tax & Production Manager
+name: Build Cities Tax & Production Mod
 
 on:
   push:
@@ -10,32 +10,39 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x]
     
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v4
     
-    - name: Setup .NET 6
-      uses: actions/setup-dotnet@v3
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
       with:
-        dotnet-version: '6.0.x'
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
     
-    - name: Restore NuGet packages
-      run: dotnet restore
+    - name: Install dependencies
+      run: npm ci
     
-    - name: Build Release
-      run: dotnet build --configuration Release --no-restore
+    - name: Build project
+      run: npm run build
     
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v3
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
       with:
-        name: TaxProductionManager-Release
-        path: bin/Release/
+        name: cities-tax-mod-build
+        path: dist/
+        retention-days: 30
     
     - name: Create Release
       if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v1
       with:
-        files: bin/Release/**/*.dll
+        files: dist/**/*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
