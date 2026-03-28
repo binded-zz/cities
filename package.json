@@ -24,7 +24,7 @@
     "webpack-cli": "^5.1.0",
     "webpack-dev-server": "^4.15.0"
   },
-  "keywords": [ "cities", "skylines", "mod", "tax", "production" ],
+  "keywords": ["cities", "skylines", "mod", "tax", "production"],
   "author": "binded-zz",
   "license": "MIT"
 }
