@@ -1,28 +1,23 @@
 import React from 'react';
-import { Tabs, Tab, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+import ResourceRow from '../ResourceRow';
+import ProductionDisplay from '../ProductionDisplay';
+import TaxSlider from '../TaxSlider';
 
 const TaxProductionWindow = () => {
     return (
         <div>
             <Tabs>
-                <TabList>
-                    <Tab>Resources</Tab>
-                    <Tab>Stats</Tab>
-                    <Tab>Tax Settings</Tab>
-                </TabList>
-
                 <TabPanel>
-                    <h2>Resource List</h2>
-                    {/* Add your resource list code here */}
+                    {/* Use ResourceRow component */}
+                    <ResourceRow />
                 </TabPanel>
                 <TabPanel>
-                    <h2>Statistics</h2>
-                    {/* Add your stats display code here */}
+                    {/* Use ProductionDisplay component */}
+                    <ProductionDisplay />
                 </TabPanel>
                 <TabPanel>
-                    <h2>Tax Sliders</h2>
-                    {/* Add your tax sliders code here */}
+                    {/* Use TaxSlider component */}
+                    <TaxSlider />
                 </TabPanel>
             </Tabs>
         </div>
