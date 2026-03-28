@@ -1,0 +1,1 @@
+import React from 'react';\nimport TaxProductionWindow from './TaxProductionWindow';\n\nconst App = () => {\n    return (\n        <div>\n            <TaxProductionWindow />\n        </div>\n    );\n};\n\nexport default App;
