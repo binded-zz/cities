@@ -1,0 +1,19 @@
+# Build artifacts
+bin/
+obj/
+
+# Visual Studio
+*.suo
+*.user
+*.userosstate
+*.sln.docstates
+
+# Rider
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# Other mod-specific ignores
+/path/to/mod-specific/files/
