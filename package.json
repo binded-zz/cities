@@ -1,1 +1,25 @@
-{\n  "name": "cities",\n  "version": "1.0.0",\n  "description": "A project for managing cities data with React.",\n  "main": "index.js",\n  "scripts": {\n    "build": "tsc",\n    "start": "react-scripts start",\n    "test": "react-scripts test",\n    "eject": "react-scripts eject"\n  },\n  "dependencies": {\n    "react": "^17.0.0",\n    "react-dom": "^17.0.0",\n    "@mui/material": "^5.0.0"\n  },\n  "devDependencies": {\n    "typescript": "^4.0.0"\n  },\n  "keywords": [],\n  "author": "",\n  "license": "ISC"\n}
+{
+  "name": "cities",
+  "version": "1.0.0",
+  "description": "Cities: Skylines 2 - Tax & Production Management Mod",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0",
+    "ts-loader": "^9.4.0",
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.1.0",
+    "webpack-dev-server": "^4.15.0"
+  }
+}
