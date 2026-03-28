@@ -1,0 +1,26 @@
+.production-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+}
+
+.production-display h1 {
+    font-size: 24px;
+    color: #343a40;
+}
+
+.production-display .stat {
+    font-size: 20px;
+    color: #495057;
+}
+
+.production-display .value {
+    font-weight: bold;
+    font-size: 28px;
+    color: #007bff;
+}
