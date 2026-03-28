@@ -1,1 +1,23 @@
-import React from 'react';\nimport Slider from '@material-ui/core/Slider';\n\ninterface ResourceRowProps {\n  title: string;\n  value: number;\n  onChange: (newValue: number) => void;\n}  \n\nconst ResourceRow: React.FC<ResourceRowProps> = ({ title, value, onChange }) => {\n  return (\n    <div style={{ display: 'flex', alignItems: 'center' }}>\n      <span style={{ marginRight: '10px' }}>{title}:</span>\n      <Slider\n        value={value}\n        onChange={(event, newValue) => onChange(newValue)}\n        aria-labelledby="continuous-slider"\n      />\n    </div>\n  );\n};\n\nexport default ResourceRow;
+import React from 'react';
+import Slider from '@material-ui/core/Slider';
+
+interface ResourceRowProps {
+  title: string;
+  value: number;
+  onChange: (newValue: number) => void;
+}
+
+const ResourceRow: React.FC<ResourceRowProps> = ({ title, value, onChange }) => {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <span style={{ marginRight: '10px' }}>{title}:</span>
+      <Slider
+        value={value}
+        onChange={(event, newValue) => onChange(newValue)}
+        aria-labelledby="continuous-slider"
+      />
+    </div>
+  );
+};
+
+export default ResourceRow;

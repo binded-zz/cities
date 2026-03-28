@@ -1,1 +1,34 @@
-import React, { useState } from 'react';\nimport './TaxSlider.css';\n\nconst TaxSlider = () => {\n    const [taxRate, setTaxRate] = useState(0);\n    const [error, setError] = useState('');\n\n    const handleChange = (event) => {\n        const value = event.target.value;\n        if (value < 0 || value > 100) {\n            setError('Tax rate must be between 0 and 100');\n        } else {\n            setError('');\n            setTaxRate(value);\n        }\n    };\n\n    return (\n        <div className="tax-slider">\n            <label htmlFor="taxRate">Tax Rate: {taxRate}%</label>\n            <input\n                type="range"\n                id="taxRate"\n                min="0"\n                max="100"\n                value={taxRate}\n                onChange={handleChange} /\n>\n            {error && <div className="error">{error}</div>}\n        </div>\n    );\n};\n\nexport default TaxSlider;
+import React, { useState } from 'react';
+import './TaxSlider.css';
+
+const TaxSlider = () => {
+    const [taxRate, setTaxRate] = useState(0);
+    const [error, setError] = useState('');
+
+    const handleChange = (event) => {
+        const value = event.target.value;
+        if (value < 0 || value > 100) {
+            setError('Tax rate must be between 0 and 100');
+        } else {
+            setError('');
+            setTaxRate(value);
+        }
+    };
+
+    return (
+        <div className="tax-slider">
+            <label htmlFor="taxRate">Tax Rate: {taxRate}%</label>
+            <input
+                type="range"
+                id="taxRate"
+                min="0"
+                max="100"
+                value={taxRate}
+                onChange={handleChange}
+            />
+            {error && <div className="error">{error}</div>}
+        </div>
+    );
+};
+
+export default TaxSlider;
