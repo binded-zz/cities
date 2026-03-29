@@ -15,6 +15,7 @@ namespace CitiesSkylines2Mod
         protected override void OnCreate()
         {
             base.OnCreate();
+            m_ButtonEnabled = ModEntry.Settings?.ButtonEnabled ?? true;
 
             AddBinding(new ValueBinding<bool>(Group, "isVisible", m_IsVisible));
             AddBinding(new ValueBinding<bool>(Group, "settingsVisible", m_SettingsVisible));

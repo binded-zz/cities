@@ -1,3 +1,4 @@
+using Colossal.IO.AssetDatabase;
 using Colossal.Logging;
 using Game;
 using Game.Modding;
@@ -8,19 +9,28 @@ namespace CitiesSkylines2Mod
     public class ModEntry : IMod
     {
         public static readonly string Name = "CitiesSkylines2Mod";
-        private static ILog s_log = LogManager.GetLogger(Name);
-
-        public ILog log => s_log;
+        public static ILog log = LogManager.GetLogger($"{nameof(CitiesSkylines2Mod)}.{nameof(ModEntry)}").SetShowsErrorsInUI(false);
+        public static ModSettings Settings { get; private set; }
 
         public void OnLoad(UpdateSystem updateSystem)
         {
-            s_log.InfoFormat(LogChannel.Modding, "Loading {0}", Name);
+            log.Info($"Loading {Name}");
+
+            Settings = new ModSettings(this);
+            Settings.RegisterInOptionsUI();
+            AssetDatabase.global.LoadSettings(nameof(CitiesSkylines2Mod), Settings, new ModSettings(this));
+
             updateSystem.UpdateAt<TaxProductionUISystem>(SystemUpdatePhase.UIUpdate);
         }
 
         public void OnDispose()
         {
-            s_log.InfoFormat(LogChannel.Modding, "Disposing {0}", Name);
+            log.Info($"Disposing {Name}");
+            if (Settings != null)
+            {
+                Settings.UnregisterInOptionsUI();
+                Settings = null;
+            }
         }
     }
-}}
+}

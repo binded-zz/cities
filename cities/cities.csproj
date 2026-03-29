@@ -15,8 +15,12 @@
       <HintPath>..\Refs\Colossal.Logging.dll</HintPath>
       <Private>false</Private>
     </Reference>
-    <Reference Include="Game">
-      <HintPath>..\Refs\Game.dll</HintPath>
+    <Reference Include="Colossal.Core">
+      <HintPath>..\Refs\Colossal.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Colossal.IO.AssetDatabase">
+      <HintPath>..\Refs\Colossal.IO.AssetDatabase.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Colossal.UI.Binding">
@@ -25,6 +29,10 @@
     </Reference>
     <Reference Include="Colossal.UI">
       <HintPath>..\Refs\Colossal.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Game">
+      <HintPath>..\Refs\Game.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
