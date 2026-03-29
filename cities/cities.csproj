@@ -35,6 +35,17 @@
       <HintPath>..\Refs\Game.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="Colossal.Localization">
+      <HintPath>..\Refs\Colossal.Localization.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\locale\en-US.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>locale\en-US.json</Link>
+    </None>
   </ItemGroup>
 
   <Target Name="BuildCitiesUI" AfterTargets="Build">

@@ -15,7 +15,10 @@ namespace CitiesSkylines2Mod
         protected override void OnCreate()
         {
             base.OnCreate();
-            m_ButtonEnabled = ModEntry.Settings?.ButtonEnabled ?? true;
+
+            var settings = ModEntry.Settings;
+            m_ButtonEnabled = settings?.ButtonEnabled ?? true;
+            m_TaxRate = settings?.DefaultTaxRate ?? 15;
 
             AddBinding(new GetterValueBinding<bool>(Group, "isVisible", () => m_IsVisible));
             AddBinding(new GetterValueBinding<bool>(Group, "settingsVisible", () => m_SettingsVisible));
@@ -26,29 +29,48 @@ namespace CitiesSkylines2Mod
             AddBinding(new TriggerBinding(Group, "toggleSettings", ToggleSettings));
             AddBinding(new TriggerBinding<float>(Group, "setTaxRate", SetTaxRate));
             AddBinding(new TriggerBinding<bool>(Group, "setButtonEnabled", SetButtonEnabled));
+
+            Log($"UISystem created — buttonEnabled={m_ButtonEnabled}, defaultTaxRate={m_TaxRate}");
         }
 
         private void ToggleWindow()
         {
             m_IsVisible = !m_IsVisible;
+            Log($"toggleWindow → isVisible={m_IsVisible}");
         }
 
         private void ToggleSettings()
         {
             m_SettingsVisible = !m_SettingsVisible;
+            Log($"toggleSettings → settingsVisible={m_SettingsVisible}");
         }
 
         private void SetTaxRate(float rate)
         {
             if (rate >= 0f && rate <= 100f)
+            {
                 m_TaxRate = rate;
+                Log($"setTaxRate → {m_TaxRate}");
+            }
         }
 
         private void SetButtonEnabled(bool enabled)
         {
             m_ButtonEnabled = enabled;
-            if (!enabled)
-                m_IsVisible = false;
+            if (!enabled) m_IsVisible = false;
+            Log($"setButtonEnabled → {m_ButtonEnabled}");
+
+            if (ModEntry.Settings != null)
+            {
+                ModEntry.Settings.ButtonEnabled = enabled;
+                ModEntry.Settings.ApplyAndSave();
+            }
+        }
+
+        private static void Log(string msg)
+        {
+            if (ModEntry.Settings?.DebugMode == true)
+                ModEntry.log.Info($"[TaxProduction] {msg}");
         }
     }
 }

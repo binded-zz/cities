@@ -1,0 +1,23 @@
+{
+  "Options.SECTION[CitiesSkylines2Mod.Main]": "Tax & Production",
+
+  "Options.GROUP[CitiesSkylines2Mod.General]": "General",
+  "Options.GROUP[CitiesSkylines2Mod.Debug]": "Debug",
+  "Options.GROUP[CitiesSkylines2Mod.About]": "About",
+
+  "Options.OPTION[CitiesSkylines2Mod.ButtonEnabled]": "Enable Toolbar Button",
+  "Options.OPTION[CitiesSkylines2Mod.ButtonEnabled][description]": "Show or hide the Tax & Production button in the toolbar. You can re-enable it here if hidden.",
+
+  "Options.OPTION[CitiesSkylines2Mod.DefaultTaxRate]": "Default Tax Rate (%)",
+  "Options.OPTION[CitiesSkylines2Mod.DefaultTaxRate][description]": "The initial tax rate applied when a new game session starts.",
+
+  "Options.OPTION[CitiesSkylines2Mod.DebugMode]": "Enable Debug Logging",
+  "Options.OPTION[CitiesSkylines2Mod.DebugMode][description]": "Write verbose mod events to the game log. Useful for troubleshooting.",
+
+  "Options.OPTION[CitiesSkylines2Mod.ResetDefaults]": "Reset to Defaults",
+  "Options.OPTION[CitiesSkylines2Mod.ResetDefaults][description]": "Restore all settings to their default values.",
+
+  "Options.OPTION[CitiesSkylines2Mod.AboutText]": "About",
+  "Options.OPTION[CitiesSkylines2Mod.OpenSourceCode]": "View Source on GitHub",
+  "Options.OPTION[CitiesSkylines2Mod.OpenSourceCode][description]": "Open the mod's GitHub repository in your browser."
+}

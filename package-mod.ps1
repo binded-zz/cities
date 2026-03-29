@@ -22,6 +22,11 @@ New-Item -ItemType Directory -Path $ModsFolder -Force | Out-Null
 Copy-Item "$RepoRoot\cities\bin\Release\net6.0\CitiesSkylines2Mod.dll" -Destination $ModsFolder -Force
 Copy-Item "$RepoRoot\mod.json" -Destination $ModsFolder -Force
 
+Write-Host "=== Copying locale files ===" -ForegroundColor Cyan
+$localeDir = "$ModsFolder\locale"
+New-Item -ItemType Directory -Path $localeDir -Force | Out-Null
+Copy-Item "$RepoRoot\locale\*" -Destination $localeDir -Force
+
 Write-Host "=== Registering Mod in content_load.json ===" -ForegroundColor Cyan
 $content = Get-Content $ContentLoadFile -Raw | ConvertFrom-Json
 if ($content.enabledMods -notcontains $ModId) {
