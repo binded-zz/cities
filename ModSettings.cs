@@ -1,11 +1,10 @@
 // Persistent Configuration Class
 
-public class PersistentConfig
+public class ModSettings
 {
-    public string Setting1 { get; set; }
-    public int Setting2 { get; set; }
+    public bool ButtonEnabled { get; set; } = true;
+    public string Version { get; set; } = "1.0.0";
+    public string Author { get; set; } = "binded-zz";
 
-    public PersistentConfig() {
-        // Default constructor
-    }
-}
+    public ModSettings() { }
+}}

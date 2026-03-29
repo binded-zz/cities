@@ -8,16 +8,23 @@ namespace CitiesSkylines2Mod
         private const string Group = "taxProduction";
 
         private bool m_IsVisible = false;
+        private bool m_SettingsVisible = false;
         private float m_TaxRate = 0f;
+        private bool m_ButtonEnabled = true;
 
         protected override void OnCreate()
         {
             base.OnCreate();
 
             AddBinding(new ValueBinding<bool>(Group, "isVisible", m_IsVisible));
+            AddBinding(new ValueBinding<bool>(Group, "settingsVisible", m_SettingsVisible));
             AddBinding(new ValueBinding<float>(Group, "taxRate", m_TaxRate));
+            AddBinding(new ValueBinding<bool>(Group, "buttonEnabled", m_ButtonEnabled));
+
             AddBinding(new TriggerBinding(Group, "toggleWindow", ToggleWindow));
+            AddBinding(new TriggerBinding(Group, "toggleSettings", ToggleSettings));
             AddBinding(new TriggerBinding<float>(Group, "setTaxRate", SetTaxRate));
+            AddBinding(new TriggerBinding<bool>(Group, "setButtonEnabled", SetButtonEnabled));
         }
 
         protected override void OnUpdate() { }
@@ -27,10 +34,22 @@ namespace CitiesSkylines2Mod
             m_IsVisible = !m_IsVisible;
         }
 
+        private void ToggleSettings()
+        {
+            m_SettingsVisible = !m_SettingsVisible;
+        }
+
         private void SetTaxRate(float rate)
         {
             if (rate >= 0f && rate <= 100f)
                 m_TaxRate = rate;
+        }
+
+        private void SetButtonEnabled(bool enabled)
+        {
+            m_ButtonEnabled = enabled;
+            if (!enabled)
+                m_IsVisible = false;
         }
     }
 }
