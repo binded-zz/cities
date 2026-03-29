@@ -1,1 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Library</OutputType><TargetFramework>net6.0</TargetFramework><RootNamespace>CitiesSkylines2Mod</RootNamespace><AssemblyName>CitiesSkylines2Mod</AssemblyName><Version>1.0.0.0</Version><LangVersion>latest</LangVersion></PropertyGroup><ItemGroup><PackageReference Include="Colossal.Logging" Version="1.0.0" /><PackageReference Include="Game" Version="0.0.20240418" /></ItemGroup><Target Name="BuildCitiesUI" AfterTargets="Build"><Exec Command="npm run build" WorkingDirectory="citiesUI" ContinueOnError="true" /></Target></Project>
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>CitiesSkylines2Mod</RootNamespace>
+    <AssemblyName>CitiesSkylines2Mod</AssemblyName>
+    <Version>1.0.0.0</Version>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Colossal.Logging" Version="1.0.0" />
+    <PackageReference Include="Game" Version="0.0.20240418" />
+  </ItemGroup>
+
+  <Target Name="BuildCitiesUI" AfterTargets="Build">
+    <Exec Command="npm run build" WorkingDirectory="citiesUI" ContinueOnError="true" />
+  </Target>
+
+</Project>

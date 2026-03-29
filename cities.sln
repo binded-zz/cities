@@ -1,22 +1,18 @@
-Visual Studio Solution File
-Version 12.00
-Visual Studio 2013
-# Visual Studio Version
-VisualStudioVersion = 12.0.21005.0
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-# Visual C++
-VisualCVersion = 12.0.40660.0
-Project("{E4E6D4C0-9FC4-4B0E-85B6-50E5EAB7140F}") = "cities", "cities\cities.vcxproj", "{D1F19E4C-61BF-4D5E-A754-A004A3C75F2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cities", "cities\cities.csproj", "{D1F19E4C-61BF-4D5E-A754-A004A3C75F2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Win32 = Debug|Win32
-		Release|Win32 = Release|Win32
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D1F19E4C-61BF-4D5E-A754-A004A3C75F2A}.Debug|Win32.ActiveCfg = Debug|Win32
-		{D1F19E4C-61BF-4D5E-A754-A004A3C75F2A}.Debug|Win32.Build.0 = Debug|Win32
-		{D1F19E4C-61BF-4D5E-A754-A004A3C75F2A}.Release|Win32.ActiveCfg = Release|Win32
-		{D1F19E4C-61BF-4D5E-A754-A004A3C75F2A}.Release|Win32.Build.0 = Release|Win32
+		{D1F19E4C-61BF-4D5E-A754-A004A3C75F2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1F19E4C-61BF-4D5E-A754-A004A3C75F2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1F19E4C-61BF-4D5E-A754-A004A3C75F2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1F19E4C-61BF-4D5E-A754-A004A3C75F2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
