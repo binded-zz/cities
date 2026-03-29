@@ -6,8 +6,34 @@ on:
       - main
 
 jobs:
-  build:
+  build-ui:
+    name: Build UI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build UI
+        run: npm run build
+
+      - name: Upload UI Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: UI
+          path: ./dist
+
+  build-mod:
+    name: Build Mod (requires game DLLs)
     runs-on: windows-latest
+    continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,7 +52,7 @@ jobs:
       - name: Publish
         run: dotnet publish --configuration Release --output ./artifacts
 
-      - name: Upload Artifacts
+      - name: Upload Mod Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: DLLs
