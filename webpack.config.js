@@ -7,11 +7,13 @@ const gray = (text) => `\x1b[90m${text}\x1b[0m`;
 
 const CSII_USERDATAPATH = process.env.CSII_USERDATAPATH;
 
-if (!CSII_USERDATAPATH) {
-  throw "CSII_USERDATAPATH environment variable is not set. Run: Options \u2192 Modding \u2192 Automatic Install in Cities: Skylines II";
-}
+const OUTPUT_DIR = CSII_USERDATAPATH
+  ? path.join(CSII_USERDATAPATH, "Mods", MOD.id)
+  : path.join(__dirname, "dist", MOD.id);
 
-const OUTPUT_DIR = `${CSII_USERDATAPATH}\\Mods\\${MOD.id}`;
+if (!CSII_USERDATAPATH) {
+  console.warn(`\n CSII_USERDATAPATH is not set. Outputting to: ${OUTPUT_DIR}\n`);
+}
 
 const banner = `
  * Cities: Skylines II UI Module
