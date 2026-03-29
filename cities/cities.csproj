@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <Target Name="BuildCitiesUI" AfterTargets="Build">
-    <Exec Command="npm run build" WorkingDirectory="citiesUI" ContinueOnError="true" />
+    <Exec Command="npm run build" WorkingDirectory=".." ContinueOnError="true" />
   </Target>
 
 </Project>
