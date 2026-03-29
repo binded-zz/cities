@@ -6,7 +6,7 @@ const TaxSlider = () => {
     const [error, setError] = useState('');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value;
+        const value = Number(event.target.value);
         if (value < 0 || value > 100) {
             setError('Tax rate must be between 0 and 100');
         } else {
