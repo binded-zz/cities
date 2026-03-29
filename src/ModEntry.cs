@@ -1,5 +1,7 @@
 using Colossal.Logging;
+using Game;
 using Game.Modding;
+using Game.SceneFlow;
 
 namespace CitiesSkylines2Mod
 {
@@ -13,15 +15,12 @@ namespace CitiesSkylines2Mod
         public void OnLoad(UpdateSystem updateSystem)
         {
             s_log.InfoFormat(LogChannel.Modding, "Loading {0}", Name);
+            updateSystem.UpdateAt<TaxProductionUISystem>(SystemUpdatePhase.UIUpdate);
         }
 
         public void OnDispose()
         {
             s_log.InfoFormat(LogChannel.Modding, "Disposing {0}", Name);
         }
-
-        public void OnUpdate()
-        {
-        }
     }
-}
+}}

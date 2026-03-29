@@ -19,6 +19,14 @@
       <HintPath>..\Refs\Game.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="Colossal.UI.Binding">
+      <HintPath>..\Refs\Colossal.UI.Binding.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Colossal.UI">
+      <HintPath>..\Refs\Colossal.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
 
   <Target Name="BuildCitiesUI" AfterTargets="Build">

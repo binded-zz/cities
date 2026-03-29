@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './TaxSlider.css';
 
+declare const engine: any;
+
 const TaxSlider = () => {
     const [taxRate, setTaxRate] = useState(0);
     const [error, setError] = useState('');
@@ -12,6 +14,9 @@ const TaxSlider = () => {
         } else {
             setError('');
             setTaxRate(value);
+            if (typeof engine !== 'undefined') {
+                engine.trigger('taxProduction.setTaxRate', value);
+            }
         }
     };
 
