@@ -1,7 +1,11 @@
 {
+  "id": "CitiesSkylines2Mod",
   "Id": "CitiesSkylines2Mod",
+  "author": "binded-zz",
+  "Author": "binded-zz",
+  "version": "1.0.0",
   "Version": "1.0.0",
   "DisplayName": "Tax & Production Mod",
   "Description": "A mod for Cities: Skylines 2 that manages tax rates and production statistics.",
-  "Author": "binded-zz"
+  "dependencies": []
 }

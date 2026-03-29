@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './TaxSlider.css';
 
-declare const engine: any;
+interface TaxSliderProps {
+    taxRate: number;
+    onTaxRateChange: (rate: number) => void;
+}
 
-const TaxSlider = () => {
-    const [taxRate, setTaxRate] = useState(0);
+const TaxSlider: React.FC<TaxSliderProps> = ({ taxRate, onTaxRateChange }) => {
     const [error, setError] = useState('');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,10 +15,7 @@ const TaxSlider = () => {
             setError('Tax rate must be between 0 and 100');
         } else {
             setError('');
-            setTaxRate(value);
-            if (typeof engine !== 'undefined') {
-                engine.trigger('taxProduction.setTaxRate', value);
-            }
+            onTaxRateChange(value);
         }
     };
 

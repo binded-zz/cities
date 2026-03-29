@@ -1,11 +1,8 @@
 .toolbar-button-wrapper {
-    position: fixed;
-    top: 110px;
-    left: 10px;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     gap: 2px;
-    z-index: 1000;
+    vertical-align: top;
 }
 
 .toolbar-btn {

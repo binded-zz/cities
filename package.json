@@ -10,21 +10,34 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "classnames": "2.3.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "typescript": "^5.0.0",
-    "ts-loader": "^9.4.0",
-    "style-loader": "^3.3.0",
-    "css-loader": "^6.8.0",
-    "webpack": "^5.88.0",
-    "webpack-cli": "^5.1.0",
+    "@swc/core": "^1.15.21",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.9",
+    "css-loader": "6.7.2",
+    "mini-css-extract-plugin": "2.7.0",
+    "sass": "^1.69.5",
+    "sass-loader": "13.2.0",
+    "style-loader": "^3.3.3",
+    "swc-loader": "^0.2.7",
+    "terser-webpack-plugin": "^5.3.10",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.0.4",
+    "webpack": "5.97.1",
+    "webpack-cli": "4.10.0",
     "webpack-dev-server": "^4.15.0"
   },
-  "keywords": ["cities", "skylines", "mod", "tax", "production"],
+  "keywords": [
+    "cities",
+    "skylines",
+    "mod",
+    "tax",
+    "production"
+  ],
   "author": "binded-zz",
   "license": "MIT"
 }

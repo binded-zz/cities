@@ -17,10 +17,10 @@ namespace CitiesSkylines2Mod
             base.OnCreate();
             m_ButtonEnabled = ModEntry.Settings?.ButtonEnabled ?? true;
 
-            AddBinding(new ValueBinding<bool>(Group, "isVisible", m_IsVisible));
-            AddBinding(new ValueBinding<bool>(Group, "settingsVisible", m_SettingsVisible));
-            AddBinding(new ValueBinding<float>(Group, "taxRate", m_TaxRate));
-            AddBinding(new ValueBinding<bool>(Group, "buttonEnabled", m_ButtonEnabled));
+            AddBinding(new GetterValueBinding<bool>(Group, "isVisible", () => m_IsVisible));
+            AddBinding(new GetterValueBinding<bool>(Group, "settingsVisible", () => m_SettingsVisible));
+            AddBinding(new GetterValueBinding<float>(Group, "taxRate", () => m_TaxRate));
+            AddBinding(new GetterValueBinding<bool>(Group, "buttonEnabled", () => m_ButtonEnabled));
 
             AddBinding(new TriggerBinding(Group, "toggleWindow", ToggleWindow));
             AddBinding(new TriggerBinding(Group, "toggleSettings", ToggleSettings));

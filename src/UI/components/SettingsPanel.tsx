@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
 import './SettingsPanel.css';
 
-declare const engine: any;
-
 interface SettingsPanelProps {
     buttonEnabled: boolean;
+    onButtonEnabledChange: (value: boolean) => void;
     onClose: () => void;
 }
 
-const SettingsPanel: React.FC<SettingsPanelProps> = ({ buttonEnabled, onClose }) => {
+const SettingsPanel: React.FC<SettingsPanelProps> = ({ buttonEnabled, onButtonEnabledChange, onClose }) => {
     const [activeTab, setActiveTab] = useState<'general' | 'about'>('general');
-
-    const handleButtonEnabledChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.checked;
-        if (typeof engine !== 'undefined') {
-            engine.trigger('taxProduction.setButtonEnabled', value);
-        }
-    };
 
     return (
         <div className="settings-panel">
@@ -46,12 +38,12 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ buttonEnabled, onClose })
                             <input
                                 type="checkbox"
                                 checked={buttonEnabled}
-                                onChange={handleButtonEnabledChange}
+                                onChange={(e) => onButtonEnabledChange(e.target.checked)}
                             />
                             <span>Enable toolbar button</span>
                         </label>
                         <p className="settings-hint">
-                            Uncheck to hide the toolbar button. Recheck to show it again.
+                            Uncheck to hide the toolbar button. Recheck via Options → Mods.
                         </p>
                     </div>
                 )}

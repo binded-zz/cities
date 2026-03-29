@@ -1,14 +1,8 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App';
-import './index.css';
+import { ModRegistrar } from "cs2/modding";
+import TaxMod from "mods/TaxMod";
 
-const container = document.getElementById('root');
-if (container) {
-  const root = createRoot(container);
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
-}
+const register: ModRegistrar = (moduleRegistry) => {
+    moduleRegistry.append('GameTopLeft', TaxMod);
+};
+
+export default register;

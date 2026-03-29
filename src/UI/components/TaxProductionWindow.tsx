@@ -2,24 +2,23 @@ import React, { useState } from 'react';
 import ResourceRow from './ResourceRow';
 import ProductionDisplay from './ProductionDisplay';
 import TaxSlider from './TaxSlider';
+import './TaxProductionWindow.css';
 
-declare const engine: any;
+interface TaxProductionWindowProps {
+    taxRate: number;
+    onTaxRateChange: (rate: number) => void;
+    onClose: () => void;
+}
 
-const TaxProductionWindow = () => {
+const TaxProductionWindow: React.FC<TaxProductionWindowProps> = ({ taxRate, onTaxRateChange, onClose }) => {
     const [activeTab, setActiveTab] = useState(0);
     const [resourceValue, setResourceValue] = useState(50);
-
-    const handleClose = () => {
-        if (typeof engine !== 'undefined') {
-            engine.trigger('taxProduction.toggleWindow');
-        }
-    };
 
     return (
         <div className="tax-production-window">
             <div className="window-header">
                 <span>Tax &amp; Production</span>
-                <button className="close-btn" onClick={handleClose}>✕</button>
+                <button className="close-btn" onClick={onClose}>✕</button>
             </div>
             <div className="tabs">
                 <button className={activeTab === 0 ? 'active' : ''} onClick={() => setActiveTab(0)}>Resources</button>
@@ -35,7 +34,12 @@ const TaxProductionWindow = () => {
                     />
                 )}
                 {activeTab === 1 && <ProductionDisplay />}
-                {activeTab === 2 && <TaxSlider />}
+                {activeTab === 2 && (
+                    <TaxSlider
+                        taxRate={taxRate}
+                        onTaxRateChange={onTaxRateChange}
+                    />
+                )}
             </div>
         </div>
     );
