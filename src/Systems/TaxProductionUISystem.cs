@@ -28,8 +28,6 @@ namespace CitiesSkylines2Mod
             AddBinding(new TriggerBinding<bool>(Group, "setButtonEnabled", SetButtonEnabled));
         }
 
-        protected override void OnUpdate() { }
-
         private void ToggleWindow()
         {
             m_IsVisible = !m_IsVisible;
