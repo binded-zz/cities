@@ -1,5 +1,4 @@
 import React from 'react';
-import Slider from '@material-ui/core/Slider';
 
 interface ResourceRowProps {
   title: string;
@@ -11,11 +10,15 @@ const ResourceRow: React.FC<ResourceRowProps> = ({ title, value, onChange }) => 
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <span style={{ marginRight: '10px' }}>{title}:</span>
-      <Slider
+      <input
+        type="range"
+        min={0}
+        max={100}
         value={value}
-        onChange={(event, newValue) => onChange(newValue)}
-        aria-labelledby="continuous-slider"
+        onChange={(e) => onChange(Number(e.target.value))}
+        aria-label={title}
       />
+      <span style={{ marginLeft: '10px' }}>{value}</span>
     </div>
   );
 };

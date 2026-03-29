@@ -1,5 +1,4 @@
 import React from 'react';
-import { ProgressBar } from 'react-bootstrap';
 
 const ProductionDisplay = () => {
     // Sample data for production statistics
@@ -18,7 +17,8 @@ const ProductionDisplay = () => {
                         <h4>{stat.product}</h4>
                         <p>Quantity Produced: {stat.quantity}</p>
                         <p>Target: {stat.target}</p>
-                        <ProgressBar now={(stat.quantity / stat.target) * 100} label={`${Math.round((stat.quantity / stat.target) * 100)}%`} />
+                        <progress value={(stat.quantity / stat.target) * 100} max={100} />
+                        <span>{Math.round((stat.quantity / stat.target) * 100)}%</span>
                     </div>
                 ))}
             </div>
