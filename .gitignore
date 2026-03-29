@@ -23,5 +23,8 @@ node_modules/
 # Game DLLs
 Refs/
 
+# Launch profiles (local paths)
+**/Properties/launchSettings.json
+
 # Other mod-specific ignores
 /path/to/mod-specific/files/
