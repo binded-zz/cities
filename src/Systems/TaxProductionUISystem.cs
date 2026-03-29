@@ -1,6 +1,5 @@
 using Colossal.UI.Binding;
 using Game.UI;
-using System.Diagnostics;
 
 namespace CitiesSkylines2Mod
 {
@@ -31,22 +30,19 @@ namespace CitiesSkylines2Mod
             AddBinding(new TriggerBinding<float>(Group, "setTaxRate", SetTaxRate));
             AddBinding(new TriggerBinding<bool>(Group, "setButtonEnabled", SetButtonEnabled));
 
-            Log($"UISystem created — buttonEnabled={m_ButtonEnabled}, defaultTaxRate={m_TaxRate}");
-            if (Debugger.IsAttached) Debugger.Break(); // BP1: system initialized — inspect m_ButtonEnabled, m_TaxRate
+            Log($"UISystem OnCreate — buttonEnabled={m_ButtonEnabled}, taxRate={m_TaxRate}");
         }
 
         private void ToggleWindow()
         {
-            if (Debugger.IsAttached) Debugger.Break(); // BP2: button clicked — trigger reached C#
             m_IsVisible = !m_IsVisible;
-            Log($"toggleWindow → isVisible={m_IsVisible}");
+            Log($"ToggleWindow → isVisible={m_IsVisible}");
         }
 
         private void ToggleSettings()
         {
-            if (Debugger.IsAttached) Debugger.Break(); // BP3: gear clicked — trigger reached C#
             m_SettingsVisible = !m_SettingsVisible;
-            Log($"toggleSettings → settingsVisible={m_SettingsVisible}");
+            Log($"ToggleSettings → settingsVisible={m_SettingsVisible}");
         }
 
         private void SetTaxRate(float rate)
@@ -54,7 +50,7 @@ namespace CitiesSkylines2Mod
             if (rate >= 0f && rate <= 100f)
             {
                 m_TaxRate = rate;
-                Log($"setTaxRate → {m_TaxRate}");
+                Log($"SetTaxRate → {m_TaxRate}");
             }
         }
 
@@ -62,7 +58,7 @@ namespace CitiesSkylines2Mod
         {
             m_ButtonEnabled = enabled;
             if (!enabled) m_IsVisible = false;
-            Log($"setButtonEnabled → {m_ButtonEnabled}");
+            Log($"SetButtonEnabled → {m_ButtonEnabled}");
 
             if (ModEntry.Settings != null)
             {
@@ -73,8 +69,7 @@ namespace CitiesSkylines2Mod
 
         private static void Log(string msg)
         {
-            if (ModEntry.Settings?.DebugMode == true)
-                ModEntry.log.Info($"[TaxProduction] {msg}");
+            ModEntry.log.Info($"[TaxProduction] {msg}");
         }
     }
 }
