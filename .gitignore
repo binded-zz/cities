@@ -20,5 +20,8 @@ dist/
 # Node
 node_modules/
 
+# Game DLLs
+Refs/
+
 # Other mod-specific ignores
 /path/to/mod-specific/files/

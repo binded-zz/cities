@@ -11,8 +11,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Colossal.Logging" Version="1.0.0" />
-    <PackageReference Include="Game" Version="0.0.20240418" />
+    <Reference Include="Colossal.Logging">
+      <HintPath>..\Refs\Colossal.Logging.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Game">
+      <HintPath>..\Refs\Game.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
 
   <Target Name="BuildCitiesUI" AfterTargets="Build">
