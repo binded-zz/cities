@@ -1,5 +1,6 @@
 using Colossal.UI.Binding;
 using Game.UI;
+using System.Diagnostics;
 
 namespace CitiesSkylines2Mod
 {
@@ -31,16 +32,19 @@ namespace CitiesSkylines2Mod
             AddBinding(new TriggerBinding<bool>(Group, "setButtonEnabled", SetButtonEnabled));
 
             Log($"UISystem created — buttonEnabled={m_ButtonEnabled}, defaultTaxRate={m_TaxRate}");
+            if (Debugger.IsAttached) Debugger.Break(); // BP1: system initialized — inspect m_ButtonEnabled, m_TaxRate
         }
 
         private void ToggleWindow()
         {
+            if (Debugger.IsAttached) Debugger.Break(); // BP2: button clicked — trigger reached C#
             m_IsVisible = !m_IsVisible;
             Log($"toggleWindow → isVisible={m_IsVisible}");
         }
 
         private void ToggleSettings()
         {
+            if (Debugger.IsAttached) Debugger.Break(); // BP3: gear clicked — trigger reached C#
             m_SettingsVisible = !m_SettingsVisible;
             Log($"toggleSettings → settingsVisible={m_SettingsVisible}");
         }
