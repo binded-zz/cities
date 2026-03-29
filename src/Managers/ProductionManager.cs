@@ -1,60 +1,78 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
-namespace Cities.Managers
+namespace Managers
 {
     public class ProductionManager
     {
-        // Dictionary to track resources and their quantities
-        private Dictionary<string, int> resources;
+        private double productionMultiplier;
+        private double warehouseEfficiency;
+        private double factoryEfficiency;
 
-        public ProductionManager()
+        public double GetProductionMultiplier()
         {
-            InitializeResources();
+            Debug.WriteLine("Getting Production Multiplier: " + productionMultiplier);
+            return productionMultiplier;
         }
 
-        // Method to initialize resources
-        private void InitializeResources()
+        public void SetProductionMultiplier(double multiplier)
         {
-            resources = new Dictionary<string, int>
+            if(multiplier < 0)
             {
-                { "Wood", 0 },
-                { "Stone", 0 },
-                { "Food", 0 },
-                { "Gold", 0 }
-            };
+                Debug.WriteLine("Attempted to set Production Multiplier to a negative value: " + multiplier);
+                throw new ArgumentException("Multiplier cannot be negative.");
+            }
+            productionMultiplier = multiplier;
+            Debug.WriteLine("Setting Production Multiplier to: " + productionMultiplier);
         }
 
-        // Method to add resources
-        public void AddResource(string type, int amount)
+        public double GetWarehouseEfficiency()
         {
-            if (resources.ContainsKey(type))
-            {
-                resources[type] += amount;
-            }
-            else
-            {
-                Console.WriteLine($"Resource type '{type}' is not recognized.");
-            }
+            Debug.WriteLine("Getting Warehouse Efficiency: " + warehouseEfficiency);
+            return warehouseEfficiency;
         }
 
-        // Method to remove resources
-        public void RemoveResource(string type, int amount)
+        public void SetWarehouseEfficiency(double efficiency)
         {
-            if (resources.ContainsKey(type) && resources[type] >= amount)
+            if(efficiency < 0 || efficiency > 1)
             {
-                resources[type] -= amount;
+                Debug.WriteLine("Attempted to set Warehouse Efficiency to an invalid value: " + efficiency);
+                throw new ArgumentException("Efficiency must be between 0 and 1.");
             }
-            else
-            {
-                Console.WriteLine($"Insufficient resources or unrecognized type '{type}'.");
-            }
+            warehouseEfficiency = efficiency;
+            Debug.WriteLine("Setting Warehouse Efficiency to: " + warehouseEfficiency);
         }
 
-        // Method to get the quantity of a resource
-        public int GetResourceQuantity(string type)
+        public double GetFactoryEfficiency()
         {
-            return resources.ContainsKey(type) ? resources[type] : 0;
+            Debug.WriteLine("Getting Factory Efficiency: " + factoryEfficiency);
+            return factoryEfficiency;
+        }
+
+        public void SetFactoryEfficiency(double efficiency)
+        {
+            if(efficiency < 0 || efficiency > 1)
+            {
+                Debug.WriteLine("Attempted to set Factory Efficiency to an invalid value: " + efficiency);
+                throw new ArgumentException("Efficiency must be between 0 and 1.");
+            }
+            factoryEfficiency = efficiency;
+            Debug.WriteLine("Setting Factory Efficiency to: " + factoryEfficiency);
+        }
+
+        public double CalculateProductionOutput(double baseOutput)
+        {
+            double output = baseOutput * productionMultiplier * warehouseEfficiency * factoryEfficiency;
+            Debug.WriteLine("Calculating Production Output: " + output);
+            return output;
+        }
+
+        public double CalculateWarehouseStorage(double capacity)
+        {
+            double storage = capacity * warehouseEfficiency;
+            Debug.WriteLine("Calculating Warehouse Storage: " + storage);
+            return storage;
         }
     }
 }
