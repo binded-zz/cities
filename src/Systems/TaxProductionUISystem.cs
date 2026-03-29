@@ -1,5 +1,6 @@
 using Colossal.UI.Binding;
 using Game.UI;
+using UnityEngine;
 
 namespace CitiesSkylines2Mod
 {
@@ -7,58 +8,66 @@ namespace CitiesSkylines2Mod
     {
         private const string Group = "taxProduction";
 
-        private bool m_IsVisible = false;
-        private bool m_SettingsVisible = false;
-        private float m_TaxRate = 0f;
-        private bool m_ButtonEnabled = true;
+        private ValueBinding<bool> m_IsVisibleBinding;
+        private ValueBinding<bool> m_SettingsVisibleBinding;
+        private ValueBinding<float> m_TaxRateBinding;
+        private ValueBinding<bool> m_ButtonEnabledBinding;
 
         protected override void OnCreate()
         {
             base.OnCreate();
 
             var settings = ModEntry.Settings;
-            m_ButtonEnabled = settings?.ButtonEnabled ?? true;
-            m_TaxRate = settings?.DefaultTaxRate ?? 15;
+            var buttonEnabled = settings?.ButtonEnabled ?? true;
+            var taxRate = (float)(settings?.DefaultTaxRate ?? 15);
 
-            AddBinding(new GetterValueBinding<bool>(Group, "isVisible", () => m_IsVisible));
-            AddBinding(new GetterValueBinding<bool>(Group, "settingsVisible", () => m_SettingsVisible));
-            AddBinding(new GetterValueBinding<float>(Group, "taxRate", () => m_TaxRate));
-            AddBinding(new GetterValueBinding<bool>(Group, "buttonEnabled", () => m_ButtonEnabled));
+            m_IsVisibleBinding = new ValueBinding<bool>(Group, "isVisible", false);
+            m_SettingsVisibleBinding = new ValueBinding<bool>(Group, "settingsVisible", false);
+            m_TaxRateBinding = new ValueBinding<float>(Group, "taxRate", taxRate);
+            m_ButtonEnabledBinding = new ValueBinding<bool>(Group, "buttonEnabled", buttonEnabled);
+
+            AddBinding(m_IsVisibleBinding);
+            AddBinding(m_SettingsVisibleBinding);
+            AddBinding(m_TaxRateBinding);
+            AddBinding(m_ButtonEnabledBinding);
 
             AddBinding(new TriggerBinding(Group, "toggleWindow", ToggleWindow));
             AddBinding(new TriggerBinding(Group, "toggleSettings", ToggleSettings));
             AddBinding(new TriggerBinding<float>(Group, "setTaxRate", SetTaxRate));
             AddBinding(new TriggerBinding<bool>(Group, "setButtonEnabled", SetButtonEnabled));
 
-            Log($"UISystem OnCreate — buttonEnabled={m_ButtonEnabled}, taxRate={m_TaxRate}");
+            Log($"OnCreate — buttonEnabled={buttonEnabled}, taxRate={taxRate}");
         }
 
         private void ToggleWindow()
         {
-            m_IsVisible = !m_IsVisible;
-            Log($"ToggleWindow → isVisible={m_IsVisible}");
+            var next = !m_IsVisibleBinding.value;
+            m_IsVisibleBinding.Update(next);
+            Log($"ToggleWindow → isVisible={next}");
         }
 
         private void ToggleSettings()
         {
-            m_SettingsVisible = !m_SettingsVisible;
-            Log($"ToggleSettings → settingsVisible={m_SettingsVisible}");
+            var next = !m_SettingsVisibleBinding.value;
+            m_SettingsVisibleBinding.Update(next);
+            Log($"ToggleSettings → settingsVisible={next}");
         }
 
         private void SetTaxRate(float rate)
         {
             if (rate >= 0f && rate <= 100f)
             {
-                m_TaxRate = rate;
-                Log($"SetTaxRate → {m_TaxRate}");
+                m_TaxRateBinding.Update(rate);
+                Log($"SetTaxRate → {rate}");
             }
         }
 
         private void SetButtonEnabled(bool enabled)
         {
-            m_ButtonEnabled = enabled;
-            if (!enabled) m_IsVisible = false;
-            Log($"SetButtonEnabled → {m_ButtonEnabled}");
+            m_ButtonEnabledBinding.Update(enabled);
+            if (!enabled)
+                m_IsVisibleBinding.Update(false);
+            Log($"SetButtonEnabled → {enabled}");
 
             if (ModEntry.Settings != null)
             {
@@ -69,7 +78,9 @@ namespace CitiesSkylines2Mod
 
         private static void Log(string msg)
         {
-            ModEntry.log.Info($"[TaxProduction] {msg}");
+            var text = $"[TaxProduction] {msg}";
+            Debug.LogWarning(text);
+            ModEntry.log.Info(text);
         }
     }
 }
