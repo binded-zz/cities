@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import AdvancedTPMWindow from "../UI/components/AdvancedTPMWindow";
 import DebugPanel from "../UI/components/DebugPanel";
 import TPMWindowShell from "../UI/components/TPMWindowShell";
-import { advancedVisible$, selectedResourceCategory$, debugEnabled$, debugPanelVisible$, showTips$, debugLastAction$, advancedWindowX$, advancedWindowY$, advancedWindowWidth$, advancedWindowHeight$, resourceRowsData$ } from "./bindings";
+import { advancedVisible$, selectedResourceCategory$, debugEnabled$, debugPanelVisible$, showTips$, debugLastAction$, advancedWindowX$, advancedWindowY$, advancedWindowWidth$, advancedWindowHeight$, resourceRowsData$, autoTaxEnabled$, autoTaxStatus$ } from "./bindings";
 
 interface ResourceRowVm {
     key: string;
@@ -67,6 +67,8 @@ const TaxWindow: React.FC = () => {
     const advancedWidth = useValue(advancedWindowWidth$) ?? 520;
     const advancedHeight = useValue(advancedWindowHeight$) ?? 420;
     const rows = parseRows(useValue(resourceRowsData$) ?? '');
+    const autoTaxEnabled = useValue(autoTaxEnabled$) ?? false;
+    const autoTaxStatus = useValue(autoTaxStatus$) ?? '';
 
     if (!advancedVisible && !debugPanelVisible) return null;
 
@@ -87,6 +89,9 @@ const TaxWindow: React.FC = () => {
                             selectedCategory={selectedCategory}
                             rows={rows}
                             showTips={showTips}
+                            autoTaxEnabled={autoTaxEnabled}
+                            autoTaxStatus={autoTaxStatus}
+                            onAutoTaxToggle={(enabled: boolean) => trigger('taxProduction', 'setAutoTaxEnabled', enabled)}
                             onResourceTaxRateChange={(key: string, rate: number) => trigger('taxProduction', 'setResourceTaxRate', `${key}:${rate}`)}
                             onCategoryChange={(category: string) => trigger('taxProduction', 'setResourceCategory', category)}
                             onCollapseChange={setAdvancedCollapsed}

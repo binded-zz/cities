@@ -24,6 +24,9 @@
     <Compile Include="..\src\Systems\TaxingProductionUISystem.cs">
       <Link>src\Systems\TaxingProductionUISystem.cs</Link>
     </Compile>
+    <Compile Include="..\src\Systems\AutoTaxSystem.cs">
+      <Link>src\Systems\AutoTaxSystem.cs</Link>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

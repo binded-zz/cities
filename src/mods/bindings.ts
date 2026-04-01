@@ -12,3 +12,7 @@ export const advancedWindowY$ = bindValue<number>('taxProduction', 'advancedWind
 export const advancedWindowWidth$ = bindValue<number>('taxProduction', 'advancedWindowWidth', 520);
 export const advancedWindowHeight$ = bindValue<number>('taxProduction', 'advancedWindowHeight', 420);
 export const resourceRowsData$ = bindValue<string>('taxProduction', 'resourceRowsData', '');
+
+// Auto-Tax bindings
+export const autoTaxEnabled$ = bindValue<boolean>('taxProduction', 'autoTaxEnabled', false);
+export const autoTaxStatus$ = bindValue<string>('taxProduction', 'autoTaxStatus', '');

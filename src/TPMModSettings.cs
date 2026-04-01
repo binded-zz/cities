@@ -6,13 +6,14 @@ namespace CitiesSkylines2Mod
 {
     [FileLocation("ModsSettings/CitiesTPM/Settings")]
     [SettingsUITabOrder(TabSettings)]
-    [SettingsUIGroupOrder(GroupGeneral, GroupDebug, GroupAbout)]
+    [SettingsUIGroupOrder(GroupGeneral, GroupAutoTax, GroupDebug, GroupAbout)]
     public class TPMModSettings : ModSetting
     {
         public const string TabSettings = "AdvancedTPM";
 
         public const string GroupGeneral = "General";
         public const string GroupInterface = "General";
+        public const string GroupAutoTax = "AutoTax";
         public const string GroupDebug = "Debug";
         public const string GroupAbout = "About";
 
@@ -45,6 +46,30 @@ namespace CitiesSkylines2Mod
         [SettingsUIHidden]
         [SettingsUISlider(min = 240, max = 900, step = 10)]
         public int AdvancedWindowHeight { get; set; } = 420;
+
+        [SettingsUISection(TabSettings, GroupAutoTax)]
+        [SettingsUIDisplayName("AutoTaxEnabled", "Enable Auto Tax")]
+        public bool AutoTaxEnabled { get; set; } = false;
+
+        [SettingsUISection(TabSettings, GroupAutoTax)]
+        [SettingsUIDisplayName("AutoTaxInterval", "Adjustment Interval (game days)")]
+        [SettingsUISlider(min = 1, max = 30, step = 1)]
+        public int AutoTaxInterval { get; set; } = 5;
+
+        [SettingsUISection(TabSettings, GroupAutoTax)]
+        [SettingsUIDisplayName("AutoTaxMinRate", "Minimum Tax Rate")]
+        [SettingsUISlider(min = -10, max = 30, step = 1)]
+        public int AutoTaxMinRate { get; set; } = 0;
+
+        [SettingsUISection(TabSettings, GroupAutoTax)]
+        [SettingsUIDisplayName("AutoTaxMaxRate", "Maximum Tax Rate")]
+        [SettingsUISlider(min = -10, max = 30, step = 1)]
+        public int AutoTaxMaxRate { get; set; } = 25;
+
+        [SettingsUISection(TabSettings, GroupAutoTax)]
+        [SettingsUIDisplayName("AutoTaxHappinessWeight", "Happiness Weight")]
+        [SettingsUISlider(min = 0, max = 100, step = 5)]
+        public int AutoTaxHappinessWeight { get; set; } = 50;
 
         [SettingsUISection(TabSettings, GroupDebug)]
         [SettingsUIDisplayName("DebugEnabled", "Enable Debug Logs")]
@@ -85,6 +110,11 @@ namespace CitiesSkylines2Mod
             AdvancedWindowY = 150;
             AdvancedWindowWidth = 520;
             AdvancedWindowHeight = 420;
+            AutoTaxEnabled = false;
+            AutoTaxInterval = 5;
+            AutoTaxMinRate = 0;
+            AutoTaxMaxRate = 25;
+            AutoTaxHappinessWeight = 50;
             DebugEnabled = false;
             ShowDebugPanel = false;
             ShowTips = true;

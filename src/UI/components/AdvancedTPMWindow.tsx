@@ -31,11 +31,48 @@ interface AdvancedTPMWindowProps {
   selectedCategory: string;
   rows: ResourceRowVm[];
   showTips: boolean;
+  autoTaxEnabled: boolean;
+  autoTaxStatus: string;
+  onAutoTaxToggle: (enabled: boolean) => void;
   onResourceTaxRateChange: (key: string, rate: number) => void;
   onCategoryChange: (category: string) => void;
   onCollapseChange?: (collapsed: boolean) => void;
   onClose: () => void;
 }
+
+/** Parse auto-tax status string: happiness|adjustCount|raiseCount|lowerCount|holdCount|resourceDirections */
+interface AutoTaxParsed {
+  happiness: number;
+  adjustCount: number;
+  raiseCount: number;
+  lowerCount: number;
+  holdCount: number;
+  directions: Map<string, { direction: number; score: number }>;
+}
+
+const parseAutoTaxStatus = (status: string): AutoTaxParsed | null => {
+  if (!status) return null;
+  const parts = status.split('|');
+  if (parts.length < 6) return null;
+  const directions = new Map<string, { direction: number; score: number }>();
+  if (parts[5]) {
+    parts[5].split(',').forEach((entry) => {
+      const [key, rest] = entry.split('=');
+      if (key && rest) {
+        const [dir, score] = rest.split(':');
+        directions.set(key, { direction: Number(dir) || 0, score: Number(score) || 0 });
+      }
+    });
+  }
+  return {
+    happiness: Number(parts[0]) || 0,
+    adjustCount: Number(parts[1]) || 0,
+    raiseCount: Number(parts[2]) || 0,
+    lowerCount: Number(parts[3]) || 0,
+    holdCount: Number(parts[4]) || 0,
+    directions,
+  };
+};
 
 const formatCurrency = (value: number): string => {
   const rounded = Math.round(value);
@@ -134,9 +171,10 @@ const ResourceSubRow: React.FC<{
   icon: string;
   localRate: number;
   selected: boolean;
+  autoTaxDir?: { direction: number; score: number };
   onRateChange: (key: string, rate: number) => void;
   onSelect: (key: string) => void;
-}> = ({ resource, icon, localRate, selected, onRateChange, onSelect }) => {
+}> = ({ resource, icon, localRate, selected, autoTaxDir, onRateChange, onSelect }) => {
   const [hover, setHover] = useState(false);
   const isIncomeNegative = resource.taxIncome < 0;
   const stageIcon = getStageIcon(resource.stage);
@@ -192,7 +230,17 @@ const ResourceSubRow: React.FC<{
           }
         }}
       />
-      <div className="adv-resource-name">{resource.label}</div>
+      <div className="adv-resource-name">
+        {resource.label}
+        {autoTaxDir && autoTaxDir.direction !== 0 && (
+          <span
+            className={`adv-autotax-indicator ${autoTaxDir.direction > 0 ? 'adv-autotax-up' : 'adv-autotax-down'}`}
+            title={`Auto-tax: ${autoTaxDir.direction > 0 ? 'raising' : 'lowering'} (score: ${autoTaxDir.score.toFixed(2)})`}
+          >
+            {autoTaxDir.direction > 0 ? '▲' : '▼'}
+          </span>
+        )}
+      </div>
       <div className="adv-resource-slider-container">
         <div className="adv-resource-slider-column">
           <div className="adv-resource-rate">{localRate}%</div>
@@ -247,9 +295,10 @@ const CategoryGroupRow: React.FC<{
   iconMap: Map<string, string>;
   localRates: Record<string, number>;
   selectedRowKey: string | null;
+  autoTaxDirections: Map<string, { direction: number; score: number }>;
   onRateChange: (key: string, rate: number) => void;
   onSelect: (key: string) => void;
-}> = ({ category, categoryRows, isFirst, iconMap, localRates, selectedRowKey, onRateChange, onSelect }) => {
+}> = ({ category, categoryRows, isFirst, iconMap, localRates, selectedRowKey, autoTaxDirections, onRateChange, onSelect }) => {
   const [expanded, setExpanded] = useState(false);
   const [headerHover, setHeaderHover] = useState(false);
   const [buttonHover, setButtonHover] = useState(false);
@@ -364,6 +413,7 @@ const CategoryGroupRow: React.FC<{
               icon={iconMap.get(r.key) ?? 'Money'}
               localRate={localRates[r.key] ?? r.taxRate}
               selected={selectedRowKey === r.key}
+              autoTaxDir={autoTaxDirections.get(r.key)}
               onRateChange={onRateChange}
               onSelect={onSelect}
             />
@@ -379,6 +429,9 @@ const AdvancedTPMWindow: React.FC<AdvancedTPMWindowProps> = ({
   selectedCategory,
   rows,
   showTips,
+  autoTaxEnabled,
+  autoTaxStatus,
+  onAutoTaxToggle,
   onResourceTaxRateChange,
   onCategoryChange,
   onCollapseChange,
@@ -387,6 +440,8 @@ const AdvancedTPMWindow: React.FC<AdvancedTPMWindowProps> = ({
   const [collapsed, setCollapsed] = useState(false);
   const safeCategory = (selectedCategory || 'all').toLowerCase();
   const iconMap = new Map(resourceCategories.flatMap((c) => c.resources.map((r) => [r.key, r.icon] as const)));
+  const autoTaxParsed = useMemo(() => parseAutoTaxStatus(autoTaxStatus), [autoTaxStatus]);
+  const autoTaxDirections = autoTaxParsed?.directions ?? new Map();
 
   // Reactive per-resource tax income from the game's native resourceTaxIncomes MapBinding.
   // Uses areaTypes$ → areaResources$ → resourceTaxIncomes chain (same as game's economy panel).
@@ -535,6 +590,13 @@ const AdvancedTPMWindow: React.FC<AdvancedTPMWindowProps> = ({
     <div className={`adv-window${collapsed ? ' adv-window-collapsed' : ''}`}>
       <div className="adv-window-header">
         <div className="adv-window-title">Advanced Tax & Production Manager</div>
+        <button
+          className={`adv-autotax-toggle${autoTaxEnabled ? ' adv-autotax-toggle-active' : ''}`}
+          onClick={() => onAutoTaxToggle(!autoTaxEnabled)}
+          title={autoTaxEnabled ? 'Auto-Tax: ON — Click to disable' : 'Auto-Tax: OFF — Click to enable'}
+        >
+          {autoTaxEnabled ? 'AUTO' : 'AUTO'}
+        </button>
         <button className="adv-collapse-btn" onClick={() => setCollapsed((v) => !v)}>{collapsed ? '+' : '−'}</button>
         <button className="adv-close-btn" onClick={onClose}>X</button>
       </div>
@@ -558,6 +620,19 @@ const AdvancedTPMWindow: React.FC<AdvancedTPMWindowProps> = ({
       {showTips && (
         <div className="adv-tip-bar">
           Expand each category to adjust individual resource tax rates.
+        </div>
+      )}
+
+      {autoTaxEnabled && autoTaxParsed && (
+        <div className="adv-autotax-status-bar">
+          <span className="adv-autotax-status-label">Auto-Tax</span>
+          <span className="adv-autotax-status-happiness" title="City Happiness">
+            {autoTaxParsed.happiness >= 70 ? '😊' : autoTaxParsed.happiness >= 40 ? '😐' : '😟'}
+            {`\u00a0${autoTaxParsed.happiness}%`}
+          </span>
+          {autoTaxParsed.raiseCount > 0 && <span className="adv-autotax-status-raise">{`▲${autoTaxParsed.raiseCount}`}</span>}
+          {autoTaxParsed.lowerCount > 0 && <span className="adv-autotax-status-lower">{`▼${autoTaxParsed.lowerCount}`}</span>}
+          {autoTaxParsed.holdCount > 0 && <span className="adv-autotax-status-hold">{`→${autoTaxParsed.holdCount}`}</span>}
         </div>
       )}
 
@@ -587,6 +662,7 @@ const AdvancedTPMWindow: React.FC<AdvancedTPMWindowProps> = ({
                   iconMap={iconMap}
                   localRates={localRates}
                   selectedRowKey={selectedRowKey}
+                  autoTaxDirections={autoTaxDirections}
                   onRateChange={handleRateChange}
                   onSelect={handleRowSelect}
                 />
@@ -613,6 +689,9 @@ const AdvancedTPMWindow: React.FC<AdvancedTPMWindowProps> = ({
           {totalDeficit > 0 && <span className="adv-footer-deficit">{`Deficit:\u00a0${formatWeight(totalDeficit)}`}</span>}
           {totalDemandFooter > 0 && <span className="adv-footer-demand">{`Demand:\u00a0${formatWeight(totalDemandFooter)}`}</span>}
           <span className={`adv-footer-income${isTotalIncomeNegative ? ' adv-income-negative' : ''}`}>{`Tax\u00a0Income:\u00a0`}<img className="adv-currency-icon-footer" src={CURRENCY_ICON} />{totalIncomeText}</span>
+          {autoTaxEnabled && autoTaxParsed && (
+            <span className="adv-footer-autotax" title="City happiness influences auto-tax decisions">{`Happiness:\u00a0${autoTaxParsed.happiness}%`}</span>
+          )}
         </div>
       </div>
       </>

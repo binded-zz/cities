@@ -23,6 +23,7 @@ namespace CitiesSkylines2Mod
             AssetDatabase.global.LoadSettings(nameof(CitiesSkylines2Mod), Settings, new TPMModSettings(this));
 
             updateSystem.UpdateAt<TaxingProductionUISystem>(SystemUpdatePhase.UIUpdate);
+            updateSystem.UpdateAt<AutoTaxSystem>(SystemUpdatePhase.UIUpdate);
 
             log.Info($"{Name} loaded successfully");
         }
