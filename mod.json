@@ -5,7 +5,7 @@
   "Author": "binded-zz",
   "version": "1.0.0",
   "Version": "1.0.0",
-  "DisplayName": "Tax & Production Mod",
-  "Description": "A mod for Cities: Skylines 2 that manages tax rates and production statistics.",
+  "DisplayName": "Cities TPM",
+  "Description": "Manage taxes across resource, industrial, and retail production chains with dual UI modes and debug controls.",
   "dependencies": []
 }

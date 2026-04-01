@@ -1,0 +1,94 @@
+using Colossal.IO.AssetDatabase;
+using Game.Modding;
+using Game.Settings;
+
+namespace CitiesSkylines2Mod
+{
+    [FileLocation("ModsSettings/CitiesTPM/Settings")]
+    [SettingsUITabOrder(TabSettings)]
+    [SettingsUIGroupOrder(GroupGeneral, GroupDebug, GroupAbout)]
+    public class TPMModSettings : ModSetting
+    {
+        public const string TabSettings = "AdvancedTPM";
+
+        public const string GroupGeneral = "General";
+        public const string GroupInterface = "General";
+        public const string GroupDebug = "Debug";
+        public const string GroupAbout = "About";
+
+        [SettingsUISection(TabSettings, GroupGeneral)]
+        [SettingsUIDisplayName("DefaultGlobalTaxRate", "Default Tax Rate")]
+        [SettingsUISlider(min = -10, max = 30, step = 1)]
+        public int DefaultGlobalTaxRate { get; set; } = 15;
+
+        [SettingsUISection(TabSettings, GroupGeneral)]
+        [SettingsUIDisplayName("UpdateSpeed", "UI Update Speed")]
+        [SettingsUISlider(min = 1, max = 3, step = 1)]
+        public int UpdateSpeed { get; set; } = 2;
+
+        [SettingsUISection(TabSettings, GroupGeneral)]
+        [SettingsUIHidden]
+        [SettingsUISlider(min = 20, max = 2400, step = 10)]
+        public int AdvancedWindowX { get; set; } = 140;
+
+        [SettingsUISection(TabSettings, GroupGeneral)]
+        [SettingsUIHidden]
+        [SettingsUISlider(min = 20, max = 1400, step = 10)]
+        public int AdvancedWindowY { get; set; } = 150;
+
+        [SettingsUISection(TabSettings, GroupGeneral)]
+        [SettingsUIHidden]
+        [SettingsUISlider(min = 360, max = 1200, step = 10)]
+        public int AdvancedWindowWidth { get; set; } = 520;
+
+        [SettingsUISection(TabSettings, GroupGeneral)]
+        [SettingsUIHidden]
+        [SettingsUISlider(min = 240, max = 900, step = 10)]
+        public int AdvancedWindowHeight { get; set; } = 420;
+
+        [SettingsUISection(TabSettings, GroupDebug)]
+        [SettingsUIDisplayName("DebugEnabled", "Enable Debug Logs")]
+        public bool DebugEnabled { get; set; } = false;
+
+        [SettingsUISection(TabSettings, GroupDebug)]
+        [SettingsUIDisplayName("ShowDebugPanel", "Show Debug Panel")]
+        public bool ShowDebugPanel { get; set; } = false;
+
+        [SettingsUISection(TabSettings, GroupDebug)]
+        [SettingsUIDisplayName("ShowTips", "Show Tips")]
+        public bool ShowTips { get; set; } = true;
+
+        [SettingsUISection(TabSettings, GroupDebug)]
+        [SettingsUIDisplayName("ResetAll", "Reset Settings")]
+        [SettingsUIButton]
+        public bool ResetAll
+        {
+            set
+            {
+                SetDefaults();
+                ApplyAndSave();
+            }
+        }
+
+        [SettingsUISection(TabSettings, GroupAbout)]
+        [SettingsUIDisplayName("AboutText", "About")]
+        [SettingsUIMultilineText]
+        public string AboutText => "AdvancedTPM - Advanced Tax & Production Management\nVersion 1.0.0\n\nResource-level tax and production controls with movable/resizable window.";
+
+        public TPMModSettings(IMod mod) : base(mod) { }
+
+        public override void SetDefaults()
+        {
+            DefaultGlobalTaxRate = 15;
+            UpdateSpeed = 2;
+            AdvancedWindowX = 140;
+            AdvancedWindowY = 150;
+            AdvancedWindowWidth = 520;
+            AdvancedWindowHeight = 420;
+            DebugEnabled = false;
+            ShowDebugPanel = false;
+            ShowTips = true;
+        }
+
+    }
+}

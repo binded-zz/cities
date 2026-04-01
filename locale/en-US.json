@@ -1,23 +1,50 @@
 {
-  "Options.SECTION[CitiesSkylines2Mod.Main]": "Tax & Production",
+  "Options.TAB[Settings]": "Cities TPM",
+  "Options.TAB[Cities TPM]": "Cities TPM",
 
-  "Options.GROUP[CitiesSkylines2Mod.General]": "General",
-  "Options.GROUP[CitiesSkylines2Mod.Debug]": "Debug",
-  "Options.GROUP[CitiesSkylines2Mod.About]": "About",
+  "Options.SECTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod]": "Cities TPM",
+  "Options.SECTION[CitiesSkylines2Mod.CitiesSkylines2Mod.ModEntry]": "Cities TPM",
+  "OPTIONS.SECTION[CITIESSKYLINES2MOD.CITIESSKYLINES2MOD.MOD]": "Cities TPM",
+  "OPTIONS.SECTION[CITIESSKYLINES2MOD.CITIESSKYLINES2MOD.MODENTRY]": "Cities TPM",
+  "Options.GROUP[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod]": "Cities TPM",
+  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.EnableBasicButton]": "Enable Basic Button (B)",
+  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.EnableAdvancedButton]": "Enable Advanced Button (A)",
+  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.DefaultGlobalTaxRate]": "Default Tax Rate",
+  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.DebugEnabled]": "Enable Debug Logs",
+  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.ShowDebugPanel]": "Show Debug Panel",
+  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.ShowTips]": "Show Tips",
+  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.ResetAll]": "Reset Settings",
+  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.AboutText]": "About",
 
-  "Options.OPTION[CitiesSkylines2Mod.ButtonEnabled]": "Enable Toolbar Button",
-  "Options.OPTION[CitiesSkylines2Mod.ButtonEnabled][description]": "Show or hide the Tax & Production button in the toolbar. You can re-enable it here if hidden.",
+  "Options.GROUP[Main]": "General",
+  "Options.GROUP[Tools]": "Debug",
+  "Options.GROUP[General]": "General",
+  "Options.GROUP[Debug]": "Debug",
+  "Options.GROUP[About]": "About",
 
-  "Options.OPTION[CitiesSkylines2Mod.DefaultTaxRate]": "Default Tax Rate (%)",
-  "Options.OPTION[CitiesSkylines2Mod.DefaultTaxRate][description]": "The initial tax rate applied when a new game session starts.",
+  "Options.OPTION[EnableBasicButton]": "Enable basic UI button",
+  "Options.OPTION[EnableBasicButton][description]": "Show or hide the basic TPM toolbar button.",
 
-  "Options.OPTION[CitiesSkylines2Mod.DebugMode]": "Enable Debug Logging",
-  "Options.OPTION[CitiesSkylines2Mod.DebugMode][description]": "Write verbose mod events to the game log. Useful for troubleshooting.",
+  "Options.OPTION[EnableAdvancedButton]": "Enable advanced UI button",
+  "Options.OPTION[EnableAdvancedButton][description]": "Show or hide the advanced TPM toolbar button.",
 
-  "Options.OPTION[CitiesSkylines2Mod.ResetDefaults]": "Reset to Defaults",
-  "Options.OPTION[CitiesSkylines2Mod.ResetDefaults][description]": "Restore all settings to their default values.",
+  "Options.OPTION[DefaultGlobalTaxRate]": "Default tax rate",
+  "Options.OPTION[DefaultGlobalTaxRate][description]": "Base tax value applied to resource rows when loaded.",
 
-  "Options.OPTION[CitiesSkylines2Mod.AboutText]": "About",
-  "Options.OPTION[CitiesSkylines2Mod.OpenSourceCode]": "View Source on GitHub",
-  "Options.OPTION[CitiesSkylines2Mod.OpenSourceCode][description]": "Open the mod's GitHub repository in your browser."
+  "Options.OPTION[DefaultChainView]": "Default chain view",
+  "Options.OPTION[DefaultChainView][description]": "0 = Resource, 1 = Industrial, 2 = Retail.",
+
+  "Options.OPTION[DebugEnabled]": "Enable debug logs",
+  "Options.OPTION[DebugEnabled][description]": "Write TPM actions to game logs.",
+
+  "Options.OPTION[ShowDebugPanel]": "Show debug panel",
+  "Options.OPTION[ShowDebugPanel][description]": "Display the on-screen debug panel when active.",
+
+  "Options.OPTION[ShowTips]": "Show tips in window",
+  "Options.OPTION[ShowTips][description]": "Show tooltips and usage tips in basic and advanced UIs.",
+
+  "Options.OPTION[ResetAll]": "Reset all TPM settings",
+  "Options.OPTION[ResetAll][description]": "Reset options, view mode, and saved window geometry.",
+
+  "Options.OPTION[AboutText]": "About"
 }

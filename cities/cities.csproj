@@ -3,12 +3,28 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <RootNamespace>CitiesSkylines2Mod</RootNamespace>
-    <AssemblyName>CitiesSkylines2Mod</AssemblyName>
+    <AssemblyName>AdvancedTPM</AssemblyName>
     <Version>1.0.0.0</Version>
     <LangVersion>latest</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <CsiiUserDataPath Condition="'$(CSII_USERDATAPATH)' != ''">$(CSII_USERDATAPATH)</CsiiUserDataPath>
+    <CsiiUserDataPath Condition="'$(CsiiUserDataPath)' == ''">$(USERPROFILE)\AppData\LocalLow\Colossal Order\Cities Skylines II</CsiiUserDataPath>
+    <ModDeployPath>$(CsiiUserDataPath)\Mods\CitiesSkylines2Mod</ModDeployPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\src\ModEntry.cs">
+      <Link>src\ModEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\src\TPMModSettings.cs">
+      <Link>src\TPMModSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Systems\TaxingProductionUISystem.cs">
+      <Link>src\Systems\TaxingProductionUISystem.cs</Link>
+    </Compile>
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Colossal.Logging">
@@ -39,6 +55,22 @@
       <HintPath>..\Refs\Colossal.Localization.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="Unity.Entities">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Cities Skylines II\Cities2_Data\Managed\Unity.Entities.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.Collections">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Cities Skylines II\Cities2_Data\Managed\Unity.Collections.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Cities Skylines II\Cities2_Data\Managed\Unity.Mathematics.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Cities Skylines II\Cities2_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -49,7 +81,20 @@
   </ItemGroup>
 
   <Target Name="BuildCitiesUI" AfterTargets="Build">
-    <Exec Command="npm run build" WorkingDirectory=".." ContinueOnError="true" />
+    <Exec Command="set &quot;CSII_USERDATAPATH=$(CsiiUserDataPath)&quot;&amp;&amp; npm.cmd run build" WorkingDirectory=".." />
+  </Target>
+
+  <Target Name="DeployCitiesMod" AfterTargets="BuildCitiesUI" Condition="Exists('$(CsiiUserDataPath)')">
+    <Message Text="Deploying CitiesSkylines2Mod to $(ModDeployPath)" Importance="high" />
+    <MakeDir Directories="$(ModDeployPath)" />
+    <MakeDir Directories="$(ModDeployPath)\locale" />
+
+    <Delete Files="$(ModDeployPath)\cities.dll" Condition="Exists('$(ModDeployPath)\cities.dll') AND '$(AssemblyName)' != 'cities'" />
+    <Delete Files="$(ModDeployPath)\CitiesSkylines2Mod.dll" Condition="Exists('$(ModDeployPath)\CitiesSkylines2Mod.dll') AND '$(AssemblyName)' != 'CitiesSkylines2Mod'" />
+
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModDeployPath)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="..\mod.json" DestinationFolder="$(ModDeployPath)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="..\locale\en-US.json" DestinationFolder="$(ModDeployPath)\locale" SkipUnchangedFiles="true" />
   </Target>
 
 </Project>

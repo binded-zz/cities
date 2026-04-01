@@ -1,6 +1,6 @@
-# Cities: Skylines 2 Tax Mod
+# Cities TPM - Tax & Production Management
 
-This mod allows players to customize and implement tax rates in Cities: Skylines 2.
+Cities TPM manages tax strategy across the production chain in Cities: Skylines 2.
 
 ## Installation
 
@@ -9,13 +9,14 @@ This mod allows players to customize and implement tax rates in Cities: Skylines
 3. Enable the mod in the game settings.
 
 ## Features
-- Custom tax rates
-- User-friendly interface
-- Compatibility with other mods
+- Chain-aware tax controls (resource, industrial, retail)
+- Dual interface modes (`Compact` and `ParkingStyle`)
+- Mod options with General, UI, Debug, and About sections
+- Debug actions and runtime diagnostics panel
 
 ## Usage
 
-After installing the mod, navigate to the tax settings in the game to adjust your tax rates.
+After installing the mod, use the toolbar button to open TPM and manage chain tax views.
 
 ## Contributing
 

@@ -4,26 +4,19 @@ import './ToolbarButton.css';
 
 interface ToolbarButtonProps {
     onClick: () => void;
-    onSettingsClick: () => void;
     isActive: boolean;
+    title: string;
 }
 
-const ToolbarButton: React.FC<ToolbarButtonProps> = ({ onClick, onSettingsClick, isActive }) => {
+const ToolbarButton: React.FC<ToolbarButtonProps> = ({ onClick, isActive, title }) => {
     return (
         <div className="toolbar-button-wrapper">
             <button
                 className={`toolbar-btn${isActive ? ' active' : ''}`}
                 onClick={onClick}
-                title="Tax & Production Mod"
+                title={title}
             >
-                <TaxIcon size={20} color={isActive ? '#4fc3f7' : '#ffffff'} />
-            </button>
-            <button
-                className="toolbar-settings-btn"
-                onClick={onSettingsClick}
-                title="Settings"
-            >
-                ⚙
+                <TaxIcon size={28} color={isActive ? '#4fc3f7' : '#ffffff'} />
             </button>
         </div>
     );

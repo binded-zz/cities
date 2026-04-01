@@ -1,12 +1,10 @@
 using Colossal.IO.AssetDatabase;
 using Game.Modding;
 using Game.Settings;
-using UnityEngine;
 
 namespace CitiesSkylines2Mod
 {
     [FileLocation(nameof(CitiesSkylines2Mod))]
-    [SettingsUISectionOrder(kSection)]
     [SettingsUIGroupOrder(GroupGeneral, GroupDebug, GroupAbout)]
     [SettingsUIShowGroupName(GroupGeneral, GroupDebug, GroupAbout)]
     public class ModSettings : Setting
@@ -53,7 +51,7 @@ namespace CitiesSkylines2Mod
         [SettingsUIButton]
         public bool OpenSourceCode
         {
-            set => Application.OpenURL("https://github.com/binded-zz/cities");
+            set { }
         }
 
         public override void SetDefaults()
