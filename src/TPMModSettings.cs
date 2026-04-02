@@ -4,7 +4,8 @@ using Game.Settings;
 
 namespace AdvancedTPM
 {
-    [FileLocation("ModsSettings/CitiesTPM/Settings")]
+    // Save settings under a folder matching the mod id to avoid legacy names
+    [FileLocation("ModsSettings/AdvancedTPM/Settings")]
     [SettingsUITabOrder(TabSettings)]
     [SettingsUIGroupOrder(GroupGeneral, GroupAutoTax, GroupAdvisor, GroupDebug, GroupAbout)]
     public class TPMModSettings : ModSetting

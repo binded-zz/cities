@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <PublishConfiguration>
   <Configuration>
-    <UserName>binded-zz</UserName>
+    <UserName>binded2</UserName>
+    <!-- ModID is assigned by Paradox when first publishing a new mod. Fill this after first PublishNewMod run. -->
+    <ModID></ModID>
     <ModVersion>1.0.0</ModVersion>
     <DisplayName>AdvancedTPM — Tax &amp; Production Manager</DisplayName>
     <ShortDescription>Advanced per-resource tax and production management with adaptive AI advisor, company browser, auto-tax engine, and dual-mode UI.</ShortDescription>
     <LongDescription>AdvancedTPM provides granular per-resource tax controls for 50+ resources, real-time production monitoring, a full company browser with efficiency analysis, an auto-tax engine with 6-factor scoring, and an adaptive learning advisor that improves recommendations over time.</LongDescription>
+    <ChangeLog></ChangeLog>
     <Thumbnail>.thumbnail.png</Thumbnail>
     <ForumLink>https://github.com/binded-zz/cities</ForumLink>
     <Tags>Code Mod</Tags>
