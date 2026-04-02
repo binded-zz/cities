@@ -1,11 +1,12 @@
 {
-  "id": "CitiesSkylines2Mod",
-  "Id": "CitiesSkylines2Mod",
+  "id": "AdvancedTPM",
+  "Id": "AdvancedTPM",
   "author": "binded-zz",
   "Author": "binded-zz",
   "version": "1.0.0",
   "Version": "1.0.0",
-  "DisplayName": "Cities TPM",
-  "Description": "Manage taxes across resource, industrial, and retail production chains with dual UI modes and debug controls.",
+  "DisplayName": "AdvancedTPM — Tax & Production Manager",
+  "Description": "Advanced per-resource tax and production management with adaptive AI advisor, company browser, auto-tax engine, and dual-mode UI.",
+  "Thumbnail": ".thumbnail.png",
   "dependencies": []
 }

@@ -19,12 +19,14 @@ dist/
 
 # Node
 node_modules/
+package-lock.json
 
-# Game DLLs
+# Game DLLs (local machine paths)
 Refs/
 
 # Launch profiles (local paths)
 **/Properties/launchSettings.json
 
-# Other mod-specific ignores
-/path/to/mod-specific/files/
+# OS files
+Thumbs.db
+.DS_Store

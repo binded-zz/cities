@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import AdvancedTPMWindow from "../UI/components/AdvancedTPMWindow";
 import DebugPanel from "../UI/components/DebugPanel";
 import TPMWindowShell from "../UI/components/TPMWindowShell";
-import { advancedVisible$, selectedResourceCategory$, debugEnabled$, debugPanelVisible$, showTips$, debugLastAction$, advancedWindowX$, advancedWindowY$, advancedWindowWidth$, advancedWindowHeight$, resourceRowsData$, autoTaxEnabled$, autoTaxStatus$ } from "./bindings";
+import { advancedVisible$, selectedResourceCategory$, debugEnabled$, debugPanelVisible$, showTips$, debugLastAction$, advancedWindowX$, advancedWindowY$, advancedWindowWidth$, advancedWindowHeight$, resourceRowsData$, autoTaxEnabled$, autoTaxStatus$, autoTaxSettings$, companyBrowserData$, learningEnabled$, advisorData$, decisionLogData$, learningStats$ } from "./bindings";
 
 interface ResourceRowVm {
     key: string;
@@ -69,6 +69,12 @@ const TaxWindow: React.FC = () => {
     const rows = parseRows(useValue(resourceRowsData$) ?? '');
     const autoTaxEnabled = useValue(autoTaxEnabled$) ?? false;
     const autoTaxStatus = useValue(autoTaxStatus$) ?? '';
+    const autoTaxSettings = useValue(autoTaxSettings$) ?? '5|0|25|50|2|';
+    const companyBrowserData = useValue(companyBrowserData$) ?? '';
+    const learningEnabled = useValue(learningEnabled$) ?? false;
+    const advisorData = useValue(advisorData$) ?? '';
+    const decisionLogData = useValue(decisionLogData$) ?? '';
+    const learningStatsData = useValue(learningStats$) ?? '';
 
     if (!advancedVisible && !debugPanelVisible) return null;
 
@@ -91,6 +97,12 @@ const TaxWindow: React.FC = () => {
                             showTips={showTips}
                             autoTaxEnabled={autoTaxEnabled}
                             autoTaxStatus={autoTaxStatus}
+                            autoTaxSettings={autoTaxSettings}
+                            companyBrowserData={companyBrowserData}
+                            advisorData={advisorData}
+                            decisionLogData={decisionLogData}
+                            learningStatsData={learningStatsData}
+                            learningEnabled={learningEnabled}
                             onAutoTaxToggle={(enabled: boolean) => trigger('taxProduction', 'setAutoTaxEnabled', enabled)}
                             onResourceTaxRateChange={(key: string, rate: number) => trigger('taxProduction', 'setResourceTaxRate', `${key}:${rate}`)}
                             onCategoryChange={(category: string) => trigger('taxProduction', 'setResourceCategory', category)}

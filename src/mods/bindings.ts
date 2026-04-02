@@ -16,3 +16,13 @@ export const resourceRowsData$ = bindValue<string>('taxProduction', 'resourceRow
 // Auto-Tax bindings
 export const autoTaxEnabled$ = bindValue<boolean>('taxProduction', 'autoTaxEnabled', false);
 export const autoTaxStatus$ = bindValue<string>('taxProduction', 'autoTaxStatus', '');
+export const autoTaxSettings$ = bindValue<string>('taxProduction', 'autoTaxSettings', '5|0|25|50|2|');
+
+// Company Browser bindings
+export const companyBrowserData$ = bindValue<string>('taxProduction', 'companyBrowserData', '');
+
+// Adaptive Learning / Advisor bindings
+export const learningEnabled$ = bindValue<boolean>('taxProduction', 'learningEnabled', false);
+export const advisorData$ = bindValue<string>('taxProduction', 'advisorData', '');
+export const decisionLogData$ = bindValue<string>('taxProduction', 'decisionLogData', '');
+export const learningStats$ = bindValue<string>('taxProduction', 'learningStats', '');

@@ -2,11 +2,11 @@ using Colossal.IO.AssetDatabase;
 using Game.Modding;
 using Game.Settings;
 
-namespace CitiesSkylines2Mod
+namespace AdvancedTPM
 {
     [FileLocation("ModsSettings/CitiesTPM/Settings")]
     [SettingsUITabOrder(TabSettings)]
-    [SettingsUIGroupOrder(GroupGeneral, GroupAutoTax, GroupDebug, GroupAbout)]
+    [SettingsUIGroupOrder(GroupGeneral, GroupAutoTax, GroupAdvisor, GroupDebug, GroupAbout)]
     public class TPMModSettings : ModSetting
     {
         public const string TabSettings = "AdvancedTPM";
@@ -14,6 +14,7 @@ namespace CitiesSkylines2Mod
         public const string GroupGeneral = "General";
         public const string GroupInterface = "General";
         public const string GroupAutoTax = "AutoTax";
+        public const string GroupAdvisor = "Advisor";
         public const string GroupDebug = "Debug";
         public const string GroupAbout = "About";
 
@@ -52,9 +53,9 @@ namespace CitiesSkylines2Mod
         public bool AutoTaxEnabled { get; set; } = false;
 
         [SettingsUISection(TabSettings, GroupAutoTax)]
-        [SettingsUIDisplayName("AutoTaxInterval", "Adjustment Interval (game days)")]
-        [SettingsUISlider(min = 1, max = 30, step = 1)]
-        public int AutoTaxInterval { get; set; } = 5;
+        [SettingsUIDisplayName("AutoTaxInterval", "Adjustment Speed")]
+        [SettingsUISlider(min = 1, max = 5, step = 1)]
+        public int AutoTaxInterval { get; set; } = 3;
 
         [SettingsUISection(TabSettings, GroupAutoTax)]
         [SettingsUIDisplayName("AutoTaxMinRate", "Minimum Tax Rate")]
@@ -70,6 +71,37 @@ namespace CitiesSkylines2Mod
         [SettingsUIDisplayName("AutoTaxHappinessWeight", "Happiness Weight")]
         [SettingsUISlider(min = 0, max = 100, step = 5)]
         public int AutoTaxHappinessWeight { get; set; } = 50;
+
+        [SettingsUISection(TabSettings, GroupAutoTax)]
+        [SettingsUIHidden]
+        public string AutoTaxExcludedResources { get; set; } = "";
+
+        [SettingsUISection(TabSettings, GroupAutoTax)]
+        [SettingsUIHidden]
+        public string AutoTaxPerResourceRanges { get; set; } = "";
+
+        [SettingsUISection(TabSettings, GroupAutoTax)]
+        [SettingsUIHidden]
+        [SettingsUISlider(min = 0, max = 100, step = 5)]
+        public int AutoTaxProfitWeight { get; set; } = 50;
+
+        [SettingsUISection(TabSettings, GroupAutoTax)]
+        [SettingsUIHidden]
+        [SettingsUISlider(min = 40, max = 100, step = 5)]
+        public int AutoTaxPanelOpacity { get; set; } = 95;
+
+        [SettingsUISection(TabSettings, GroupAdvisor)]
+        [SettingsUIDisplayName("AdaptiveLearningEnabled", "Enable Adaptive Learning")]
+        public bool AdaptiveLearningEnabled { get; set; } = false;
+
+        [SettingsUISection(TabSettings, GroupAdvisor)]
+        [SettingsUIDisplayName("LearningAggressiveness", "Learning Speed")]
+        [SettingsUISlider(min = 1, max = 5, step = 1)]
+        public int LearningAggressiveness { get; set; } = 3;
+
+        [SettingsUISection(TabSettings, GroupAdvisor)]
+        [SettingsUIDisplayName("ShowAdvisorPanel", "Show Advisor Tab")]
+        public bool ShowAdvisorPanel { get; set; } = true;
 
         [SettingsUISection(TabSettings, GroupDebug)]
         [SettingsUIDisplayName("DebugEnabled", "Enable Debug Logs")]
@@ -111,10 +143,17 @@ namespace CitiesSkylines2Mod
             AdvancedWindowWidth = 520;
             AdvancedWindowHeight = 420;
             AutoTaxEnabled = false;
-            AutoTaxInterval = 5;
+            AutoTaxInterval = 3;
             AutoTaxMinRate = 0;
             AutoTaxMaxRate = 25;
             AutoTaxHappinessWeight = 50;
+            AutoTaxExcludedResources = "";
+            AutoTaxPerResourceRanges = "";
+            AutoTaxProfitWeight = 50;
+            AutoTaxPanelOpacity = 95;
+            AdaptiveLearningEnabled = false;
+            LearningAggressiveness = 3;
+            ShowAdvisorPanel = true;
             DebugEnabled = false;
             ShowDebugPanel = false;
             ShowTips = true;

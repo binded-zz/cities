@@ -2,9 +2,12 @@
 <PublishConfiguration>
   <Configuration>
     <UserName>binded-zz</UserName>
-    <PublishTime>2026-03-29 00:15:07</PublishTime>
-    <Notes>
-      <!-- Add any additional notes here -->
-    </Notes>
+    <ModVersion>1.0.0</ModVersion>
+    <DisplayName>AdvancedTPM — Tax &amp; Production Manager</DisplayName>
+    <ShortDescription>Advanced per-resource tax and production management with adaptive AI advisor, company browser, auto-tax engine, and dual-mode UI.</ShortDescription>
+    <LongDescription>AdvancedTPM provides granular per-resource tax controls for 50+ resources, real-time production monitoring, a full company browser with efficiency analysis, an auto-tax engine with 6-factor scoring, and an adaptive learning advisor that improves recommendations over time.</LongDescription>
+    <Thumbnail>.thumbnail.png</Thumbnail>
+    <ForumLink>https://github.com/binded-zz/cities</ForumLink>
+    <Tags>Code Mod</Tags>
   </Configuration>
 </PublishConfiguration>

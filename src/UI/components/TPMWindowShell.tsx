@@ -11,17 +11,20 @@ interface TPMWindowShellProps {
   children: React.ReactNode;
 }
 
+// Guard against NaN/undefined reaching CoHTML style properties (triggers "invalid value" warnings)
+const safeNum = (v: number, fallback: number): number => (Number.isFinite(v) ? v : fallback);
+
 const TPMWindowShell: React.FC<TPMWindowShellProps> = ({ x, y, width, height, collapsed = false, collapsedHeight = 74, onSaveRect, children }) => {
-  const [rect, setRect] = useState({ x, y, width, height });
+  const [rect, setRect] = useState({ x: safeNum(x, 140), y: safeNum(y, 150), width: safeNum(width, 520), height: safeNum(height, 420) });
   const [activeMode, setActiveMode] = useState<'none' | 'drag' | 'resize'>('none');
   const dragRef = useRef<{ active: boolean; startX: number; startY: number; ox: number; oy: number }>({ active: false, startX: 0, startY: 0, ox: x, oy: y });
   const resizeRef = useRef<{ active: boolean; startX: number; startY: number; ow: number; oh: number }>({ active: false, startX: 0, startY: 0, ow: width, oh: height });
 
   useEffect(() => {
-    setRect({ x, y, width, height });
+    setRect({ x: safeNum(x, 140), y: safeNum(y, 150), width: safeNum(width, 520), height: safeNum(height, 420) });
   }, [x, y, width, height]);
 
-  const visibleHeight = collapsed ? collapsedHeight : rect.height;
+  const visibleHeight = safeNum(collapsed ? collapsedHeight : rect.height, 420);
 
   const onMove = (clientX: number, clientY: number) => {
     if (dragRef.current.active) {
@@ -60,16 +63,16 @@ const TPMWindowShell: React.FC<TPMWindowShellProps> = ({ x, y, width, height, co
     <>
     {activeMode !== 'none' && (
       <div
-        style={{ position: 'fixed', inset: 0, pointerEvents: 'auto', zIndex: 100000, cursor: activeMode === 'drag' ? 'move' : 'nwse-resize' }}
+        style={{ position: 'fixed', top: 0, right: 0, bottom: 0, left: 0, pointerEvents: 'auto', zIndex: 100000, cursor: activeMode === 'drag' ? 'move' : 'nwse-resize' }}
         onMouseMove={(e) => onMove(e.clientX, e.clientY)}
         onMouseUp={() => stopInteraction()}
       />
     )}
     <div
-      style={{ position: 'absolute', left: rect.x, top: rect.y, width: rect.width, height: visibleHeight, pointerEvents: 'auto', display: 'flex', flexDirection: 'column' }}
+      style={{ position: 'absolute', left: safeNum(rect.x, 140), top: safeNum(rect.y, 150), width: safeNum(rect.width, 520), height: visibleHeight, pointerEvents: 'auto', display: 'flex', flexDirection: 'column' }}
       onMouseDown={(e) => {
         const target = e.target as HTMLElement;
-        if (target && (target.tagName === 'INPUT' || target.tagName === 'BUTTON')) {
+        if (target && (target.tagName === 'INPUT' || target.tagName === 'BUTTON' || target.closest('[data-interactive]') || target.closest('.ats-panel'))) {
           return;
         }
         if (e.clientY <= rect.y + 42) {

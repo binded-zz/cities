@@ -1,50 +1,44 @@
-{
-  "Options.TAB[Settings]": "Cities TPM",
-  "Options.TAB[Cities TPM]": "Cities TPM",
+﻿{
+  "Options.SECTION[AdvancedTPM.Mod]": "Advanced TPM",
+  "Options.TAB[AdvancedTPM.TPMModSettings.AdvancedTPM]": "Advanced TPM",
 
-  "Options.SECTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod]": "Cities TPM",
-  "Options.SECTION[CitiesSkylines2Mod.CitiesSkylines2Mod.ModEntry]": "Cities TPM",
-  "OPTIONS.SECTION[CITIESSKYLINES2MOD.CITIESSKYLINES2MOD.MOD]": "Cities TPM",
-  "OPTIONS.SECTION[CITIESSKYLINES2MOD.CITIESSKYLINES2MOD.MODENTRY]": "Cities TPM",
-  "Options.GROUP[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod]": "Cities TPM",
-  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.EnableBasicButton]": "Enable Basic Button (B)",
-  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.EnableAdvancedButton]": "Enable Advanced Button (A)",
-  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.DefaultGlobalTaxRate]": "Default Tax Rate",
-  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.DebugEnabled]": "Enable Debug Logs",
-  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.ShowDebugPanel]": "Show Debug Panel",
-  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.ShowTips]": "Show Tips",
-  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.ResetAll]": "Reset Settings",
-  "Options.OPTION[CitiesSkylines2Mod.CitiesSkylines2Mod.Mod,TPMModSettings.AboutText]": "About",
-
-  "Options.GROUP[Main]": "General",
-  "Options.GROUP[Tools]": "Debug",
   "Options.GROUP[General]": "General",
+  "Options.GROUP[AutoTax]": "Auto Tax",
   "Options.GROUP[Debug]": "Debug",
   "Options.GROUP[About]": "About",
 
-  "Options.OPTION[EnableBasicButton]": "Enable basic UI button",
-  "Options.OPTION[EnableBasicButton][description]": "Show or hide the basic TPM toolbar button.",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.DefaultGlobalTaxRate]": "Default Tax Rate",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.DefaultGlobalTaxRate][description]": "Base tax value applied to resource rows when loaded.",
 
-  "Options.OPTION[EnableAdvancedButton]": "Enable advanced UI button",
-  "Options.OPTION[EnableAdvancedButton][description]": "Show or hide the advanced TPM toolbar button.",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.UpdateSpeed]": "UI Update Speed",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.UpdateSpeed][description]": "1 = Fast, 2 = Normal, 3 = Slow. Controls how often the UI refreshes data.",
 
-  "Options.OPTION[DefaultGlobalTaxRate]": "Default tax rate",
-  "Options.OPTION[DefaultGlobalTaxRate][description]": "Base tax value applied to resource rows when loaded.",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.AutoTaxEnabled]": "Enable Auto Tax",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.AutoTaxEnabled][description]": "Automatically adjust per-resource tax rates based on profitability and happiness.",
 
-  "Options.OPTION[DefaultChainView]": "Default chain view",
-  "Options.OPTION[DefaultChainView][description]": "0 = Resource, 1 = Industrial, 2 = Retail.",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.AutoTaxInterval]": "Adjustment Interval",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.AutoTaxInterval][description]": "How often auto-tax runs. Higher = less frequent adjustments.",
 
-  "Options.OPTION[DebugEnabled]": "Enable debug logs",
-  "Options.OPTION[DebugEnabled][description]": "Write TPM actions to game logs.",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.AutoTaxMinRate]": "Minimum Tax Rate",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.AutoTaxMinRate][description]": "Auto-tax will never lower a rate below this value.",
 
-  "Options.OPTION[ShowDebugPanel]": "Show debug panel",
-  "Options.OPTION[ShowDebugPanel][description]": "Display the on-screen debug panel when active.",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.AutoTaxMaxRate]": "Maximum Tax Rate",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.AutoTaxMaxRate][description]": "Auto-tax will never raise a rate above this value.",
 
-  "Options.OPTION[ShowTips]": "Show tips in window",
-  "Options.OPTION[ShowTips][description]": "Show tooltips and usage tips in basic and advanced UIs.",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.AutoTaxHappinessWeight]": "Happiness Weight",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.AutoTaxHappinessWeight][description]": "How much city wellbeing influences tax direction. 0 = ignore, 100 = primary factor.",
 
-  "Options.OPTION[ResetAll]": "Reset all TPM settings",
-  "Options.OPTION[ResetAll][description]": "Reset options, view mode, and saved window geometry.",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.DebugEnabled]": "Enable Debug Logs",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.DebugEnabled][description]": "Write TPM actions to game logs.",
 
-  "Options.OPTION[AboutText]": "About"
+  "Options.OPTION[AdvancedTPM.TPMModSettings.ShowDebugPanel]": "Show Debug Panel",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.ShowDebugPanel][description]": "Display the on-screen debug panel when active.",
+
+  "Options.OPTION[AdvancedTPM.TPMModSettings.ShowTips]": "Show Tips",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.ShowTips][description]": "Show tooltips and usage tips in basic and advanced UIs.",
+
+  "Options.OPTION[AdvancedTPM.TPMModSettings.ResetAll]": "Reset All Settings",
+  "Options.OPTION[AdvancedTPM.TPMModSettings.ResetAll][description]": "Reset options, view mode, and saved window geometry.",
+
+  "Options.OPTION[AdvancedTPM.TPMModSettings.AboutText]": "About"
 }

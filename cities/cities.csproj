@@ -4,14 +4,14 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net472</TargetFramework>
-    <RootNamespace>CitiesSkylines2Mod</RootNamespace>
+    <RootNamespace>AdvancedTPM</RootNamespace>
     <AssemblyName>AdvancedTPM</AssemblyName>
     <Version>1.0.0.0</Version>
     <LangVersion>latest</LangVersion>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <CsiiUserDataPath Condition="'$(CSII_USERDATAPATH)' != ''">$(CSII_USERDATAPATH)</CsiiUserDataPath>
     <CsiiUserDataPath Condition="'$(CsiiUserDataPath)' == ''">$(USERPROFILE)\AppData\LocalLow\Colossal Order\Cities Skylines II</CsiiUserDataPath>
-    <ModDeployPath>$(CsiiUserDataPath)\Mods\CitiesSkylines2Mod</ModDeployPath>
+    <ModDeployPath>$(CsiiUserDataPath)\Mods\AdvancedTPM</ModDeployPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +26,18 @@
     </Compile>
     <Compile Include="..\src\Systems\AutoTaxSystem.cs">
       <Link>src\Systems\AutoTaxSystem.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Systems\CompanyBrowserSystem.cs">
+      <Link>src\Systems\CompanyBrowserSystem.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Systems\CityLearningData.cs">
+      <Link>src\Systems\CityLearningData.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Systems\AdaptiveLearningSystem.cs">
+      <Link>src\Systems\AdaptiveLearningSystem.cs</Link>
+    </Compile>
+    <Compile Include="..\src\LocaleEN.cs">
+      <Link>src\LocaleEN.cs</Link>
     </Compile>
   </ItemGroup>
 
@@ -88,15 +100,16 @@
   </Target>
 
   <Target Name="DeployCitiesMod" AfterTargets="BuildCitiesUI" Condition="Exists('$(CsiiUserDataPath)')">
-    <Message Text="Deploying CitiesSkylines2Mod to $(ModDeployPath)" Importance="high" />
+    <Message Text="Deploying AdvancedTPM to $(ModDeployPath)" Importance="high" />
     <MakeDir Directories="$(ModDeployPath)" />
     <MakeDir Directories="$(ModDeployPath)\locale" />
 
-    <Delete Files="$(ModDeployPath)\cities.dll" Condition="Exists('$(ModDeployPath)\cities.dll') AND '$(AssemblyName)' != 'cities'" />
-    <Delete Files="$(ModDeployPath)\CitiesSkylines2Mod.dll" Condition="Exists('$(ModDeployPath)\CitiesSkylines2Mod.dll') AND '$(AssemblyName)' != 'CitiesSkylines2Mod'" />
+    <Delete Files="$(ModDeployPath)\cities.dll" Condition="Exists('$(ModDeployPath)\cities.dll')" />
+    <Delete Files="$(ModDeployPath)\CitiesSkylines2Mod.dll" Condition="Exists('$(ModDeployPath)\CitiesSkylines2Mod.dll')" />
 
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModDeployPath)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="..\mod.json" DestinationFolder="$(ModDeployPath)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="..\.thumbnail.png" DestinationFolder="$(ModDeployPath)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="..\locale\en-US.json" DestinationFolder="$(ModDeployPath)\locale" SkipUnchangedFiles="true" />
   </Target>
 

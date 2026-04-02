@@ -12,7 +12,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 
-namespace CitiesSkylines2Mod
+namespace AdvancedTPM
 {
     public partial class TaxingProductionUISystem : UISystemBase
     {
@@ -361,6 +361,17 @@ namespace CitiesSkylines2Mod
                 default: activeInterval = 16; inactiveInterval = 64; break;
             }
             int refreshInterval = _advancedVisible.value ? activeInterval : inactiveInterval;
+
+            // Force immediate refresh when AutoTaxSystem changed rates
+            if (AutoTaxSystem.TaxRatesChanged)
+            {
+                AutoTaxSystem.TaxRatesChanged = false;
+                _updateCounter = 0;
+                ReadGameTaxRates();
+                UpdateProductionData();
+                return;
+            }
+
             if (_updateCounter >= refreshInterval)
             {
                 _updateCounter = 0;
