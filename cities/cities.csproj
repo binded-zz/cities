@@ -26,6 +26,22 @@
     -->
   </ItemGroup>
 
+  <!-- Ensure mod metadata and assets are included in the build output for publishing tools that expect them alongside the DLL -->
+  <ItemGroup>
+    <None Include="..\mod.json">
+      <Link>mod.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\.thumbnail.png">
+      <Link>.thumbnail.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\locale\en-US.json">
+      <Link>locale\en-US.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <ItemGroup>
     <Reference Include="Colossal.Logging">
       <HintPath>..\Refs\Colossal.Logging.dll</HintPath>
