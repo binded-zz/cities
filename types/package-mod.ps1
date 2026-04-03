@@ -19,7 +19,17 @@ if ($LASTEXITCODE -ne 0) { Write-Host "UI build failed!" -ForegroundColor Red; e
 
 Write-Host "=== Copying C# DLL and mod.json ===" -ForegroundColor Cyan
 New-Item -ItemType Directory -Path $ModsFolder -Force | Out-Null
-Copy-Item "$RepoRoot\cities\bin\Release\net6.0\CitiesSkylines2Mod.dll" -Destination $ModsFolder -Force
+
+# Prefer the net472 AdvancedTPM.dll output; fall back to a direct Release\AdvancedTPM.dll if necessary
+$dllPath = "$RepoRoot\cities\bin\Release\net472\AdvancedTPM.dll"
+if (-not (Test-Path $dllPath)) {
+    $dllPath = "$RepoRoot\cities\bin\Release\AdvancedTPM.dll"
+}
+if (-not (Test-Path $dllPath)) {
+    Write-Host "Built DLL not found at expected locations: $dllPath" -ForegroundColor Red
+    exit 1
+}
+Copy-Item $dllPath -Destination $ModsFolder -Force
 Copy-Item "$RepoRoot\mod.json" -Destination $ModsFolder -Force
 
 Write-Host "=== Copying locale files ===" -ForegroundColor Cyan
