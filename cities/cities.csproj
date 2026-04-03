@@ -101,7 +101,8 @@
     <None Include="AdvancedTPM.Template.csproj" />
   </ItemGroup>
 
-  <Target Name="BuildCitiesUI" AfterTargets="Build">
+  <!-- Only run the UI build when node_modules is present to avoid failing dotnet build when npm deps are not installed -->
+  <Target Name="BuildCitiesUI" AfterTargets="Build" Condition="Exists('..\\node_modules')">
     <Exec Command="set &quot;CSII_USERDATAPATH=$(CsiiUserDataPath)&quot;&amp;&amp; npm.cmd run build" WorkingDirectory=".." />
   </Target>
 
