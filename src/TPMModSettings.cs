@@ -4,7 +4,7 @@ using Game.Settings;
 
 namespace AdvancedTPM
 {
-    // Save settings under a folder matching the mod id to avoid legacy names
+    // Save settings under a folder matching the mod id. Use ModsSettings for user-visible settings and ModsData for larger runtime data.
     [FileLocation("ModsSettings/AdvancedTPM/Settings")]
     [SettingsUITabOrder(TabSettings)]
     [SettingsUIGroupOrder(GroupGeneral, GroupAutoTax, GroupAdvisor, GroupDebug, GroupAbout)]

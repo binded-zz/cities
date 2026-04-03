@@ -810,9 +810,15 @@ namespace AdvancedTPM
 
         private static string ResolveLearningDataPath(TPMModSettings settings)
         {
-            // Store learning data alongside mod settings
+            // Store learning data under ModsData/AdvancedTPM to separate larger runtime datasets from settings
             string basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            string modDataDir = Path.Combine(basePath, "..", "LocalLow", "Colossal Order", "Cities Skylines II", "ModsSettings", "CitiesTPM");
+            string modDataDir = Path.Combine(basePath, "..", "LocalLow", "Colossal Order", "Cities Skylines II", "ModsData", "AdvancedTPM");
+            try
+            {
+                if (!Directory.Exists(modDataDir))
+                    Directory.CreateDirectory(modDataDir);
+            }
+            catch { }
             return Path.Combine(modDataDir, "learning_data.dat");
         }
 
