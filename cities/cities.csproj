@@ -36,6 +36,10 @@
       <Link>.thumbnail.png</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\Properties\Thumbnail.png">
+      <Link>.thumbnail.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="..\locale\en-US.json">
       <Link>locale\en-US.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
